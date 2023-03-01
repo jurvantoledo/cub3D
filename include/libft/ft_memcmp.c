@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_memcmp.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/03/14 15:42:19 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/03/14 15:42:21 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
 	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
+		if (str1[i] != str2[i])
+		{
+			return (str1[i] - str2[i]);
+		}
+		i++;
 	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
 	return (0);
 }

@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strnstr.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/03/14 15:43:49 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/03/14 15:43:50 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
+	size_t	i;
+	size_t	j;
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
+	i = 0;
+	j = 0;
+	if (!*needle || !needle)
+		return ((char *)haystack);
+	while (haystack[i] != '\0' && i < len)
 	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
+		while (haystack[i + j] == needle[j] && i + j < len)
+		{
+			j++;
+			if (needle[j] == '\0')
+				return ((char *)&haystack[i]);
+		}
+		j = 0;
+		i++;
 	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
 	return (0);
 }

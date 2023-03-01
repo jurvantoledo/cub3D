@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   utils.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2023/03/01 17:00:35 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2023/03/01 17:01:33 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+void	free_arr(char **arr)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
+	int	i;
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
+	i = 0;
+	while (arr[i])
 	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
+		free(arr[i]);
+		i++;
 	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
-	return (0);
+	free(arr);
 }

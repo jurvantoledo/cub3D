@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   get_next_line.h                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/03/11 10:02:58 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/03/11 10:03:00 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#ifndef GET_NEXT_LINE_H
 
-void	initialize(t_data *data, int argc, char *argv[])
-{
-	data->argc = argc;
-	data->argv = argv;
-}
+# include <unistd.h> 
+# include <stdlib.h>
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
+# define GET_NEXT_LINE_H
 
-	if (argc < 2)
-	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
-	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
-	return (0);
-}
+char	*get_next_line(int fd);
+size_t	ft_strlen(char const *str);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_remainder(char *string);
+char	*copy_sentence(char *string);
+
+#endif

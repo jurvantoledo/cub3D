@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_putchar_fd.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/03/14 15:42:36 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/03/14 15:42:38 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+void	ft_putchar_fd(char s, int fd)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
-
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
-	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
-	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
-	return (0);
+	write(fd, &s, 1);
 }

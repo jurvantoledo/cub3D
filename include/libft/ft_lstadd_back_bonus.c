@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_lstadd_back_bonus.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/03/14 15:41:29 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/03/14 15:41:31 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
+	t_list	*t;
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
+	if (*lst == NULL)
+		*lst = new;
+	else
 	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
+		t = ft_lstlast(*lst);
+		t->next = new;
 	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
-	return (0);
 }

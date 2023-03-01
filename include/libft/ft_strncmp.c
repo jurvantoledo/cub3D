@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strncmp.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/03/14 15:43:44 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/10/06 12:39:29 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+int	ft_strncmp(const char *str1, const char *str2, size_t num)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
+	size_t	idx;
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
+	idx = 0;
+	while (idx < num)
 	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
+		if (str1[idx] == '\0' || str2[idx] == '\0')
+			return ((unsigned char)str1[idx] - (unsigned char)str2[idx]);
+		else if (str1[idx] != str2[idx])
+		{
+			return ((unsigned char)str1[idx] - (unsigned char)str2[idx]);
+		}
+		idx++;
 	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
 	return (0);
 }

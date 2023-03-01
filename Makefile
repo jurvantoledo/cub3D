@@ -1,23 +1,35 @@
 NAME = cub3d
 CC = gcc
 FLAGS = 
-SRC = src/main.c
+
+LIBFT = include/libft
+
+SRC =	src/main.c \
+		src/parser/parse_map.c \
+		src/utils/utils.c \
+		include/gnl/get_next_line_utils.c \
+		include/gnl/get_next_line.c
 
 OBJ = ${SRC:%.c=%.o}
 
-all: $(NAME)
+all: libft $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT)/libft.a -o $(NAME)
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
+libft:
+	@$(MAKE) -C $(LIBFT)
+
 clean:
 	rm -f $(OBJ)
+	@$(MAKE) -C $(LIBFT) clean
 
 fclean: clean
 	rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT) fclean
 
 re: fclean all
 

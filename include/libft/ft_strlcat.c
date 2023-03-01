@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strlcat.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/03/14 15:43:27 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/03/14 15:43:29 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
+	size_t	i;
+	size_t	dlen;
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
+	i = 0;
+	dlen = ft_strlen(dst);
+	if (!dstsize || dlen >= dstsize)
+		return (ft_strlen(src) + dstsize);
+	while (i < dstsize - dlen - 1 && src[i] != '\0')
 	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
+		dst[dlen + i] = src[i];
+		i++;
 	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
-	return (0);
+	dst[dlen + i] = '\0';
+	return (ft_strlen(src) + dlen);
 }

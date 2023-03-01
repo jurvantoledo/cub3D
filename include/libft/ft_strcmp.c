@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strcmp.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/10/26 10:55:41 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/10/26 10:56:02 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
-
-void	initialize(t_data *data, int argc, char *argv[])
+int	ft_strcmp(char *s1, char *s2)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
+	int	i;
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
+	i = 0;
+	while (s1[i] && s2[i])
 	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
+		if (s1[i] != s2[i])
+		{
+			return (s1[i] - s2[i]);
+		}
+		i++;
 	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
 	return (0);
 }

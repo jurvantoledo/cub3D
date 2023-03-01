@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_arraylen.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/10/26 10:53:26 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/10/26 10:54:50 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+size_t	ft_arraylen(char **array)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
+	size_t	len;
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
-	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
-	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
-	return (0);
+	len = 0;
+	while (array[len])
+		len++;
+	return (len);
 }

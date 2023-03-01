@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_putnbr_fd.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/03/14 15:42:49 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/03/14 15:42:51 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+void	ft_putnbr_fd(int n, int fd)
 {
-	data->argc = argc;
-	data->argv = argv;
-}
+	char	t;
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
+	if (n == -2147483648)
 	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
+		ft_putstr_fd("-2", fd);
+		n = 147483648;
 	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
-	return (0);
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = n * -1;
+	}
+	if (n >= 0 && n <= 9)
+	{
+		t = n + '0';
+		ft_putchar_fd(t, fd);
+	}
+	else
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
 }

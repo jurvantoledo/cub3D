@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_calloc.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Created: 2022/03/14 15:40:37 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2022/03/14 15:40:40 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+void	*ft_calloc(size_t count, size_t size)
 {
-	data->argc = argc;
-	data->argv = argv;
+	char	*new;
+
+	new = malloc(count * size);
+	if (new == NULL)
+		return (NULL);
+	ft_memset(new, 0, count * size);
+	return (new);
 }
 
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	if (argc < 2)
-	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
-	}
-	initialize(&data, argc, argv);
-	parse_map(&data);
-	return (0);
-}
+/* 
+	Malloced de hoeveelheid chracters * de size bijvoorbeeld een sizeof(int).
+	daarna zet het de count * size naar 0 in de string new.
+*/
