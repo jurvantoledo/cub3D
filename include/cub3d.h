@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:33:37 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/02 18:43:57 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ typedef struct s_map {
 	int		height;
 	int		width;
 	char	**map;
+	char	*texture[4];
+	char	*ceiling;
+	char	*floor;
 }	t_map;
 
 typedef struct s_data {
@@ -32,7 +35,11 @@ typedef struct s_data {
 	t_map	map;
 }	t_data;
 
-
+/*+++++++++++ Map Parser functions +++++++++++++*/
 void	parse_map(t_data *data);
+
+/*+++++++++++ Error functions +++++++++++++*/
+void	ft_error(char *str, int exit_code);
+
 
 #endif

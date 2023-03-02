@@ -7,6 +7,7 @@ LIBFT = include/libft
 SRC =	src/main.c \
 		src/parser/parse_map.c \
 		src/utils/utils.c \
+		src/error/error.c \
 		include/gnl/get_next_line_utils.c \
 		include/gnl/get_next_line.c
 
