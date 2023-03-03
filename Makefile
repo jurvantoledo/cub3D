@@ -6,6 +6,9 @@ LIBFT = include/libft
 
 SRC =	src/main.c \
 		src/parser/parse_map.c \
+		src/parser/parse_textures.c \
+		src/parser/parse_floor_ceiling.c \
+		src/parser/parse_lat_long.c \
 		src/utils/utils.c \
 		src/error/error.c \
 		include/gnl/get_next_line_utils.c \

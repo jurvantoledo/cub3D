@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/01 16:34:45 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/03 15:10:42 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	main(int argc, char *argv[])
 	}
 	initialize(&data, argc, argv);
 	parse_map(&data);
+	// system("leaks cub3d");
 	return (0);
 }
