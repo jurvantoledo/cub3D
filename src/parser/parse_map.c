@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:10:18 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/02 18:59:21 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/03 14:01:37 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	parse_height(t_data *data)
 
 	fd = open(data->argv[1], O_RDONLY);
 	if (fd < 0)
-	{
-		printf("%s\n", "File descriptor failed");
-		return (0);
-	}
+		ft_error("File descriptor failed", EXIT_FAILURE);
 	str = get_next_line(fd);
 	lines = 0;
 	while (str)
