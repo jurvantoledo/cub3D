@@ -6,11 +6,22 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:10:18 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/06 14:54:25 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/06 15:52:48 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+static void	print_map(t_data *data)
+{
+	int	test1 = 0;
+
+	while (data->map.map[test1])
+	{
+		printf("%s", data->map.map[test1]);
+		test1++;
+	}
+}
 
 void	get_map(t_data *data)
 {
@@ -23,34 +34,22 @@ void	get_map(t_data *data)
 	fd = open(data->argv[1], O_RDONLY);
 	str = get_next_line(fd);
 	str = remove_lines_until_map(data, str, fd);
-	data->map.map = ft_calloc(sizeof(char *), data->map.height);
+	data->map.map = ft_calloc(sizeof(char *), data->map.height + 1);
 	i = 0;
 	while (i < data->map.height)
 	{
-		data->map.map[i] = ft_calloc(sizeof(char), data->map.width);
-		split_map = ft_split(str, '\n');
+		data->map.map[i] = ft_calloc(sizeof(char), data->map.width + 1);
 		j = 0;
 		while (j < data->map.width)
 		{
-			data->map.map[i][j] = split_map[i][j];
+			data->map.map[i][j] = str[j];
 			j++;
 		}
 		free(str);
 		str = get_next_line(fd);
 		i++;
 	}
-	// int	test1 = 0;
-	// int	test2;
-	// while (data->map.map[test1])
-	// {
-	// 	test2 = 0;
-	// 	while (data->map.map[test1][test2])
-	// 	{
-	// 		printf("%c\n", data->map.map[test1][test2]);
-	// 		test2++;
-	// 	}
-	// 	test1++;
-	// }
+	print_map(data);
 }
 
 void	parse_map(t_data *data)
