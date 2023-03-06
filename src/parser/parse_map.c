@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:10:18 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/06 16:10:19 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/06 16:10:53 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	get_map(t_data *data)
 {
 	int		fd;
 	char	*str;
-	char	**split_map;
 	int		i;
 	int		j;
 
