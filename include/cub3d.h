@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/06 16:10:07 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/06 16:43:38 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "gnl/get_next_line.h"
 
 typedef struct s_map {
-	int		fd;
 	int		height;
 	int		width;
 	char	**world_map;
