@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/06 14:27:12 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/06 16:10:07 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_map {
 	int		fd;
 	int		height;
 	int		width;
-	char	**map;
+	char	**world_map;
 	char	*texture[4];
 	char	*ceiling;
 	char	*floor;
