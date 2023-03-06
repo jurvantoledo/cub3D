@@ -6,12 +6,13 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/06 16:43:38 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/06 16:44:36 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
