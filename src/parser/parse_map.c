@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:10:18 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/06 15:52:48 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/06 16:04:12 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static void	print_map(t_data *data)
 {
-	int	test1 = 0;
+	int	test1;
 
+	test1 = 0;
 	while (data->map.map[test1])
 	{
 		printf("%s", data->map.map[test1]);
