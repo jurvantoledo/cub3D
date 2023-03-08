@@ -1,7 +1,7 @@
 NO ./assets/textures/yellow.png
 SO ./assets/textures/red.png
-WE ./assets/textures/grey.png
-EA ./assets/textures/brown.png
+WE ./assets/textures/brown.png
+EA ./assets/textures/grey.png
 
 F 220,100,0
 C 225,30,0

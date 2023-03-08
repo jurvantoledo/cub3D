@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 14:16:49 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 14:34:22 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 18:29:43 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	hook(void *param)
 {
 	t_data		*data;
 	t_player	*player;
-	int			x;
-	int			y;
 
 	data = (t_data *)param;
 	player = &data->player;
@@ -29,5 +27,6 @@ void	hook(void *param)
 		mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		exec_moves(data, player);
 	test(data);
+	mlx_image_to_window(data->mlx, data->foreground, 0, 0);
 }
 

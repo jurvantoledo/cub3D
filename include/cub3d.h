@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 15:11:38 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 17:57:06 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 # include "../libs/MLX42/include/MLX42/MLX42.h"
@@ -35,7 +36,6 @@ typedef struct s_ipos {
 }	t_ipos;
 
 typedef struct s_map {
-	t_ipos	dimensions;
 	int		height;
 	int		width;
 	char	**world_map;
@@ -87,6 +87,8 @@ bool	setup(t_data *data);
 
 /*+++++++++++ Util functions +++++++++++++*/
 void	free_arr(char **arr);
+
+void	test(t_data *cub3d);
 
 
 #endif

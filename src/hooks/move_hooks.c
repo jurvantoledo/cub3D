@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 14:30:04 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 14:36:48 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 18:14:29 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ static void	move_forward(t_data *data, t_player *player)
 
 void	exec_moves(t_data *data, t_player *player)
 {
-	move_forward(data, player);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
+		move_forward(data, player);
 }

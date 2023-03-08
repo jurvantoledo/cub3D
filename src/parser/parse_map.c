@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:10:18 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 13:48:57 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 17:56:16 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 static void	print_map(t_data *data)
 {
 	int	test1;
+	int	test2;
 
 	test1 = 0;
 	while (data->map.world_map[test1])
 	{
-		printf("map lines: %s\n", data->map.world_map[test1]);
+		printf("%s\n", data->map.world_map[test1]);
 		test1++;
 	}
 }

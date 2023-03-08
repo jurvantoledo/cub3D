@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 15:14:40 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 18:32:39 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	test(t_data *cub3d)
 		//Calculate height of line to draw on screen
 		int lineHeight = (int)(HEIGHT / perpWallDist);
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + HEIGHT / 2;
+		int drawStart = lineHeight / 2 + HEIGHT / 2;
 		if (drawStart < 0) drawStart = 0;
 		int drawEnd = lineHeight / 2 + HEIGHT / 2;
 		if (drawEnd >= HEIGHT) drawEnd = HEIGHT - 1;
@@ -132,6 +132,7 @@ void	test(t_data *cub3d)
 			index++;
 			continue ;
 		}
+		printf("%d %d\n", drawStart, drawEnd);
 		while (drawStart < drawEnd)
 		{
 			mlx_put_pixel(cub3d->foreground, index, drawStart, color);
@@ -146,7 +147,7 @@ void	initialize(t_data *data, int argc, char *argv[])
 	data->argc = argc;
 	data->argv = argv;
 	data->plane.x = 0;
-	data->plane.y = 0;
+	data->plane.y = 0.66;
 	data->move_speed = 0.045;
 	data->rotation_speed = 0.05;
 }
@@ -155,70 +156,24 @@ int	main(int argc, char *argv[])
 {
 	t_data	data;
 
-	if (argc < 2)
+	ft_memset(&data, 0, sizeof(data));
+	if (argc < 2 || argc > 2)
 	{
 		printf("%s\n", "More arguments needed");
 		return (EXIT_SUCCESS);
 	}
 	initialize(&data, argc, argv);
 	parse_map(&data);
-	validate_map(&data);
-	// find_textures(&data);
+	// validate_map(&data);
+	find_textures(&data);
 	setup(&data);
 	mlx_image_to_window(data.mlx, data.background, 0, 0);
 	mlx_image_to_window(data.mlx, data.foreground, 0, 0);
-	// mlx_loop_hook(data.mlx, &hook, &data);
+	mlx_loop_hook(data.mlx, &hook, &data);
 	mlx_loop(data.mlx);
 	// system("leaks cub3d");
 	return (EXIT_SUCCESS);
 }
-
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <stdbool.h>
-
-// #define WIDTH 512
-// #define HEIGHT 512
-
-// static mlx_image_t* image;
-
-// int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
-// {
-//     return (r << 24 | g << 16 | b << 8 | a);
-// }
-
-// void ft_randomize(void* param)
-// {
-// 	for (int32_t i = 0; i < image->width; ++i)
-// 	{
-// 		for (int32_t y = 0; y < image->height; ++y)
-// 		{
-// 			uint32_t color = ft_pixel(
-// 				rand() % 0xFF, // R
-// 				rand() % 0xFF, // G
-// 				rand() % 0xFF, // B
-// 				rand() % 0xFF  // A
-// 			);
-// 			mlx_put_pixel(image, i, y, color);
-// 		}
-// 	}
-// }
-
-// void ft_hook(void* param)
-// {
-// 	mlx_t* mlx = param;
-
-// 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-// 		mlx_close_window(mlx);
-// 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-// 		image->instances[0].y -= 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-// 		image->instances[0].y += 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-// 		image->instances[0].x -= 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-// 		image->instances[0].x += 5;
-// }
 
 // // -----------------------------------------------------------------------------
 
