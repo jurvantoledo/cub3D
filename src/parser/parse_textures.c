@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 15:20:07 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/03 15:24:09 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 14:04:05 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ void	parse_textures(t_data *data)
 	printf("the SO texture: %s\n", data->map.texture[1]);
 	printf("the WE texture: %s\n", data->map.texture[2]);
 	printf("the EA texture: %s\n", data->map.texture[3]);
+	close(fd);
 }
