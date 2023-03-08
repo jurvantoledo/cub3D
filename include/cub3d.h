@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/07 16:02:17 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 12:04:27 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,20 @@ typedef struct s_map {
 	int		width;
 	char	**world_map;
 	char	*texture[4];
-	char	*ceiling;
-	char	*floor;
+	int		*ceiling;
+	int		*floor;
 }	t_map;
+
+typedef struct s_dpos {
+	double	x;
+	double	y;
+}	t_dpos;
+
+typedef struct s_player {
+	t_dpos	loc;
+	t_dpos	direction;
+	t_dpos	plane;
+}	t_player;
 
 typedef struct s_data {
 	int				argc;
@@ -41,6 +52,8 @@ typedef struct s_data {
 	mlx_image_t		*background;
 	mlx_image_t		*foreground;
 	t_map			map;
+	t_player		player;
+	t_dpos			plane;
 	double			move_speed;
 	double			rotation_speed;
 }	t_data;
@@ -55,5 +68,12 @@ char	*remove_lines_until_map(t_data *data, char *str, int fd);
 
 /*+++++++++++ Error functions +++++++++++++*/
 void	ft_error(char *str, int exit_code);
+
+/*+++++++++++ Exec functions +++++++++++++*/
+bool	setup(t_data *data);
+
+/*+++++++++++ Util functions +++++++++++++*/
+void	free_arr(char **arr);
+
 
 #endif

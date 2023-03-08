@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/07 16:29:24 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 12:03:01 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ void	initialize(t_data *data, int argc, char *argv[])
 {
 	data->argc = argc;
 	data->argv = argv;
+	data->plane.x = 0;
+	data->plane.y = 0;
+	data->move_speed = 0.045;
+	data->rotation_speed = 0.05;
 }
 
 int	main(int argc, char *argv[])
@@ -29,6 +33,10 @@ int	main(int argc, char *argv[])
 	}
 	initialize(&data, argc, argv);
 	parse_map(&data);
+	setup(&data);
+	mlx_image_to_window(data.mlx, data.background, 0, 0);
+	mlx_image_to_window(data.mlx, data.foreground, 0, 0);
+	mlx_loop(data.mlx);
 	// system("leaks cub3d");
 	return (0);
 }
