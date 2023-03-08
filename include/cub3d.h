@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 13:48:26 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 15:11:38 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,19 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
+
+typedef struct s_dpos {
+	double	x;
+	double	y;
+}	t_dpos;
+
+typedef struct s_ipos {
+	int	x;
+	int	y;
+}	t_ipos;
+
 typedef struct s_map {
+	t_ipos	dimensions;
 	int		height;
 	int		width;
 	char	**world_map;
@@ -32,21 +44,16 @@ typedef struct s_map {
 	int		floor;
 }	t_map;
 
-typedef struct s_dpos {
-	double	x;
-	double	y;
-}	t_dpos;
-
 typedef struct s_player {
 	t_dpos	loc;
 	t_dpos	direction;
 	t_dpos	plane;
+	t_ipos	mouse;
 }	t_player;
 
 typedef struct s_data {
 	int				argc;
 	char			**argv;
-
 	mlx_t			*mlx;
 	mlx_texture_t	*textures[4];
 	mlx_image_t		*background;
@@ -65,9 +72,15 @@ int		parse_width(t_data *data);
 void	parse_textures(t_data *data);
 void	parse_floor_ceiling(t_data *data);
 char	*remove_lines_until_map(t_data *data, int fd);
+bool	find_textures(t_data *data);
+bool	validate_map(t_data *data);
 
 /*+++++++++++ Error functions +++++++++++++*/
 void	ft_error(char *str, int exit_code);
+
+/*+++++++++++ Hook functions +++++++++++++*/
+void	hook(void *param);
+void	exec_moves(t_data *data, t_player *player);
 
 /*+++++++++++ Exec functions +++++++++++++*/
 bool	setup(t_data *data);

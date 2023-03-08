@@ -14,6 +14,10 @@ SRC =	src/main.c \
 		src/parser/parse_textures.c \
 		src/parser/parse_floor_ceiling.c \
 		src/parser/parse_lat_long.c \
+		src/parser/validate_map.c \
+		src/textures/textures.c \
+		src/hooks/hook.c \
+		src/hooks/move_hooks.c \
 		src/exec/setup.c \
 		src/utils/utils.c \
 		src/error/error.c \
