@@ -6,18 +6,17 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 15:21:03 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 11:58:02 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 13:29:57 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	*get_value(t_data *data, char *str)
+static int	get_value(t_data *data, char *str)
 {
 	char	**split_str;
 	char	**split_komma;
 	int		*val;
-	int		i;
 
 	split_str = ft_split(str, ' ');
 	if (!split_str)
@@ -26,17 +25,14 @@ static int	*get_value(t_data *data, char *str)
 	if (!split_komma)
 		return (0);
 	free_arr(split_str);
-	i = 0;
 	val = malloc(sizeof(int));
 	if (!val)
 		return (0);
-	while (split_komma[i])
-	{
-		val[i] = ft_atoi(split_komma[i]);
-		i++;
-	}
+	val[0] = (ft_atoi(split_komma[0]) << 24) | \
+	(ft_atoi(split_komma[1]) << 16) | (ft_atoi(split_komma[2]) << 8) | \
+	0x000000FF;
 	free_arr(split_komma);
-	return (val);
+	return (val[0]);
 }
 
 void	parse_floor_ceiling(t_data *data)
@@ -66,6 +62,6 @@ void	parse_floor_ceiling(t_data *data)
 		str = get_next_line(fd);
 	}
 	close(fd);
-	printf("The floor: %d %d %d\n", data->map.floor[0], data->map.floor[1], data->map.floor[2]);
-	printf("the ceiling: %d %d %d\n", data->map.ceiling[0], data->map.ceiling[1], data->map.ceiling[2]);
+	printf("The floor: %d\n", data->map.floor);
+	printf("the ceiling: %d\n", data->map.ceiling);
 }

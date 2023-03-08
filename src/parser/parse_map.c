@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:10:18 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/06 16:10:53 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 13:48:57 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	print_map(t_data *data)
 	test1 = 0;
 	while (data->map.world_map[test1])
 	{
-		printf("%s", data->map.world_map[test1]);
+		printf("map lines: %s\n", data->map.world_map[test1]);
 		test1++;
 	}
 }
@@ -32,8 +32,9 @@ void	get_map(t_data *data)
 	int		j;
 
 	fd = open(data->argv[1], O_RDONLY);
-	str = get_next_line(fd);
-	str = remove_lines_until_map(data, str, fd);
+	if (fd < 0)
+		ft_error("File descriptor failed", EXIT_FAILURE);
+	str = remove_lines_until_map(data, fd);
 	data->map.world_map = ft_calloc(sizeof(char *), data->map.height + 1);
 	i = 0;
 	while (i < data->map.height)
@@ -50,6 +51,7 @@ void	get_map(t_data *data)
 		i++;
 	}
 	print_map(data);
+	close(fd);
 }
 
 void	parse_map(t_data *data)

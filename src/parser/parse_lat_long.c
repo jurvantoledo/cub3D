@@ -6,16 +6,18 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 16:02:44 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/06 14:26:57 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 13:48:20 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-char	*remove_lines_until_map(t_data *data, char *str, int fd)
+char	*remove_lines_until_map(t_data *data, int fd)
 {
-	int	k;
+	int		k;
+	char	*str;
 
+	str = get_next_line(fd);
 	k = 0;
 	while (str && k < 6)
 	{
@@ -40,8 +42,7 @@ int	parse_height(t_data *data)
 	fd = open(data->argv[1], O_RDONLY);
 	if (fd < 0)
 		ft_error("File descriptor failed", EXIT_FAILURE);
-	str = get_next_line(fd);
-	str = remove_lines_until_map(data, str, fd);
+	str = remove_lines_until_map(data, fd);
 	lines = 0;
 	while (str)
 	{
@@ -60,9 +61,11 @@ static int	get_width(char *str, int prev_width, int total_width)
 	width = 0;
 	while (str[width])
 	{
-		width++;
 		if (width > prev_width && total_width < width)
+		{
 			total_width = width;
+		}
+		width++;
 	}
 	prev_width = width;
 	return (total_width);
@@ -72,14 +75,13 @@ int	parse_width(t_data *data)
 {
 	int		fd;
 	char	*str;
-	int		width;
 	int		prev_width;
 	int		total_width;
 
 	fd = open(data->argv[1], O_RDONLY);
 	if (fd < 0)
 		ft_error("File descriptor failed", EXIT_FAILURE);
-	str = get_next_line(fd);
+	str = remove_lines_until_map(data, fd);
 	prev_width = 0;
 	total_width = 0;
 	while (str)

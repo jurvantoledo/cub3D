@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 12:03:01 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/08 13:49:53 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char *argv[])
 	mlx_image_to_window(data.mlx, data.background, 0, 0);
 	mlx_image_to_window(data.mlx, data.foreground, 0, 0);
 	mlx_loop(data.mlx);
-	// system("leaks cub3d");
+	system("leaks cub3d");
 	return (0);
 }
 
