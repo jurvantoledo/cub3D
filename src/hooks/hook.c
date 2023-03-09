@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 14:16:49 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/09 14:06:49 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/09 15:54:40 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void	hook(void *param)
 	player = &data->player;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_UP) || \
-		mlx_is_key_down(data->mlx, MLX_KEY_DOWN) || \
-		mlx_is_key_down(data->mlx, MLX_KEY_LEFT) || \
-		mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-	{
-		exec_moves(data, player);
-	}
+	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
+		move_forward(data, player);
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
+		move_back(data, player);
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+		move_left(data, player);
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+		move_right(data, player);
 	test(data);
 }

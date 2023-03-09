@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/09 13:27:56 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/09 15:55:50 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ void	ft_error(char *str, int exit_code);
 
 /*+++++++++++ Hook functions +++++++++++++*/
 void	hook(void *param);
-void	exec_moves(t_data *data, t_player *player);
+void	move_forward(t_data *data, t_player *player);
+void	move_back(t_data *data, t_player *player);
+void	move_left(t_data *data, t_player *player);
+void	move_right(t_data *data, t_player *player);
 
 /*+++++++++++ Exec functions +++++++++++++*/
 bool	setup(t_data *data);
