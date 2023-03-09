@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/09 15:55:50 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/09 16:29:02 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ typedef struct s_player {
 	t_ipos	mouse;
 }	t_player;
 
+typedef struct s_raycast
+{
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	int		map_x;
+	int		map_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	perpwalldist;
+	int		step_x;
+	int		step_y;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		texture_y;
+	int		texture_x;
+}	t_raycast;
+
+
 typedef struct s_data {
 	int				argc;
 	char			**argv;
@@ -59,11 +81,13 @@ typedef struct s_data {
 	mlx_texture_t	*textures[4];
 	mlx_image_t		*background;
 	mlx_image_t		*foreground;
+	double			move_speed;
+	double			rotation_speed;
+
 	t_map			map;
 	t_player		player;
 	t_dpos			plane;
-	double			move_speed;
-	double			rotation_speed;
+	t_raycast		ray;
 }	t_data;
 
 /*+++++++++++ Map Parser functions +++++++++++++*/

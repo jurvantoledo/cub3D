@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/09 16:17:40 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/09 16:33:37 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 void	test(t_data *data)
 {
 	(void)data;
-	int			index	= 0;
-	t_player	*player	= &data->player;
-	t_map		*map	= &data->map;
-	ft_memset(data->foreground->pixels, 0, data->foreground->width * data->foreground->height * sizeof(int));
+	int			index;
+	t_player	*player = &data->player;
+	t_map		*map = &data->map;
+	t_raycast	*ray = &data->ray;
 
+
+	ft_memset(data->foreground->pixels, 0, data->foreground->width * \
+				data->foreground->height * sizeof(int));
+	index = 0;
 	while (index < WIDTH)
 	{
 		//calculate ray position and direction
