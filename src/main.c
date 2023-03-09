@@ -6,19 +6,19 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/09 14:07:16 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/09 16:17:40 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	test(t_data *cub3d)
+void	test(t_data *data)
 {
-	(void)cub3d;
+	(void)data;
 	int			index	= 0;
-	t_player	*player	= &cub3d->player;
-	t_map		*map	= &cub3d->map;
-	ft_memset(cub3d->foreground->pixels, 0, cub3d->foreground->width * cub3d->foreground->height * sizeof(int));
+	t_player	*player	= &data->player;
+	t_map		*map	= &data->map;
+	ft_memset(data->foreground->pixels, 0, data->foreground->width * data->foreground->height * sizeof(int));
 
 	while (index < WIDTH)
 	{
@@ -100,7 +100,7 @@ void	test(t_data *cub3d)
 		if (drawEnd >= HEIGHT) drawEnd = HEIGHT - 1;
 		//choose wall color
 		int color = 0x00000000;
-		if (map->world_map[mapY][mapX] == '1')
+		if (map->world_map[mapX][mapY] == '1')
 			color = 0x555555FF;
 		if (color && side == 1)
 			color = 0x999999FF;
@@ -136,7 +136,7 @@ void	test(t_data *cub3d)
 		int	lol = drawStart;
 		while (lol < drawEnd)
 		{
-			mlx_put_pixel(cub3d->foreground, index, lol, color);
+			mlx_put_pixel(data->foreground, index, lol, color);
 			lol++;
 		}
 		index++;
