@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 18:32:39 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/09 12:15:15 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	test(t_data *cub3d)
 
 	while (index < WIDTH)
 	{
+		printf("direction x: %f dirextion y: %f\n", player->direction.x, player->direction.y);
 		//calculate ray position and direction
 		double cameraX = 2 * index / (double)WIDTH - 1; //x-coordinate in camera space
 		double rayDirX = player->direction.x + player->plane.x * cameraX;
@@ -33,8 +34,8 @@ void	test(t_data *cub3d)
 		//length of ray from current position to next x or y-side
 		double sideDistX;
 		double sideDistY;
-		double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
-		double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+      	double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+      	double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
 		double perpWallDist;
 
 	  //what direction to step in x or y-direction (either +1 or -1)
@@ -80,7 +81,7 @@ void	test(t_data *cub3d)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if (map->world_map[mapY][mapX] == '1') hit = 1;
+			if (map->world_map[mapX][mapY] == '1') hit = 1;
 		}
 		//Calculate distance projected on camera direction. This is the shortest distance from the point where the wall is
 		//hit to the camera plane. Euclidean to center camera point would give fisheye effect!
@@ -88,15 +89,20 @@ void	test(t_data *cub3d)
 		//for size == 1, but can be simplified to the code below thanks to how sideDist and deltaDist are computed:
 		//because they were left scaled to |rayDir|. sideDist is the entire length of the ray above after the multiple
 		//steps, but we subtract deltaDist once because one step more into the wall was taken above.
-		if (side == 0) perpWallDist = (sideDistX - deltaDistX);
-		else          perpWallDist = (sideDistY - deltaDistY);
+      if(side == 0)
+		perpWallDist = (mapX - player->loc.x + (1 - stepX) / 2) / rayDirX;
+      else          
+	  	perpWallDist = (mapY - player->loc.y + (1 - stepY) / 2) / rayDirY;
 		//Calculate height of line to draw on screen
+		printf("perpWallDist: %f\n", perpWallDist);
 		int lineHeight = (int)(HEIGHT / perpWallDist);
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = lineHeight / 2 + HEIGHT / 2;
+		printf("lineHeight: %d\n", lineHeight);
+		int drawStart = -lineHeight / 2 + HEIGHT / 2;
 		if (drawStart < 0) drawStart = 0;
 		int drawEnd = lineHeight / 2 + HEIGHT / 2;
 		if (drawEnd >= HEIGHT) drawEnd = HEIGHT - 1;
+		printf("drawStart: %d drawEnd: %d\n", drawStart, drawEnd);
 		//choose wall color
 		int color = 0x00000000;
 		if (map->world_map[mapY][mapX] == '1')
@@ -132,11 +138,11 @@ void	test(t_data *cub3d)
 			index++;
 			continue ;
 		}
-		printf("%d %d\n", drawStart, drawEnd);
-		while (drawStart < drawEnd)
+		int	lol = drawStart;
+		while (lol < drawEnd)
 		{
-			mlx_put_pixel(cub3d->foreground, index, drawStart, color);
-			drawStart++;
+			mlx_put_pixel(cub3d->foreground, index, lol, color);
+			lol++;
 		}
 		index++;
 	}
@@ -147,9 +153,13 @@ void	initialize(t_data *data, int argc, char *argv[])
 	data->argc = argc;
 	data->argv = argv;
 	data->plane.x = 0;
-	data->plane.y = 0.66;
+	data->plane.y = -0.66;
 	data->move_speed = 0.045;
 	data->rotation_speed = 0.05;
+	data->player.direction.x = -1;
+	data->player.direction.y = 0;
+	data->player.loc.x = 3;
+	data->player.loc.y = 3;
 }
 
 int	main(int argc, char *argv[])
@@ -160,7 +170,7 @@ int	main(int argc, char *argv[])
 	if (argc < 2 || argc > 2)
 	{
 		printf("%s\n", "More arguments needed");
-		return (EXIT_SUCCESS);
+		return (EXIT_FAILURE);
 	}
 	initialize(&data, argc, argv);
 	parse_map(&data);
