@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 17:57:06 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/09 13:27:56 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_ipos {
 }	t_ipos;
 
 typedef struct s_map {
+	t_ipos	dimensions;
 	int		height;
 	int		width;
 	char	**world_map;

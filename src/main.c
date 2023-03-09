@@ -6,12 +6,11 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/09 12:15:15 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/09 14:07:16 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
 
 void	test(t_data *cub3d)
 {
@@ -23,7 +22,6 @@ void	test(t_data *cub3d)
 
 	while (index < WIDTH)
 	{
-		printf("direction x: %f dirextion y: %f\n", player->direction.x, player->direction.y);
 		//calculate ray position and direction
 		double cameraX = 2 * index / (double)WIDTH - 1; //x-coordinate in camera space
 		double rayDirX = player->direction.x + player->plane.x * cameraX;
@@ -94,15 +92,12 @@ void	test(t_data *cub3d)
       else          
 	  	perpWallDist = (mapY - player->loc.y + (1 - stepY) / 2) / rayDirY;
 		//Calculate height of line to draw on screen
-		printf("perpWallDist: %f\n", perpWallDist);
 		int lineHeight = (int)(HEIGHT / perpWallDist);
 		//calculate lowest and highest pixel to fill in current stripe
-		printf("lineHeight: %d\n", lineHeight);
 		int drawStart = -lineHeight / 2 + HEIGHT / 2;
 		if (drawStart < 0) drawStart = 0;
 		int drawEnd = lineHeight / 2 + HEIGHT / 2;
 		if (drawEnd >= HEIGHT) drawEnd = HEIGHT - 1;
-		printf("drawStart: %d drawEnd: %d\n", drawStart, drawEnd);
 		//choose wall color
 		int color = 0x00000000;
 		if (map->world_map[mapY][mapX] == '1')
@@ -156,10 +151,6 @@ void	initialize(t_data *data, int argc, char *argv[])
 	data->plane.y = -0.66;
 	data->move_speed = 0.045;
 	data->rotation_speed = 0.05;
-	data->player.direction.x = -1;
-	data->player.direction.y = 0;
-	data->player.loc.x = 3;
-	data->player.loc.y = 3;
 }
 
 int	main(int argc, char *argv[])
@@ -174,7 +165,7 @@ int	main(int argc, char *argv[])
 	}
 	initialize(&data, argc, argv);
 	parse_map(&data);
-	// validate_map(&data);
+	validate_map(&data);
 	find_textures(&data);
 	setup(&data);
 	mlx_image_to_window(data.mlx, data.background, 0, 0);
