@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/09 16:29:02 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/13 16:26:29 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,14 @@ typedef struct s_raycast
 	double	raydir_y;
 	int		map_x;
 	int		map_y;
+	int		side;
 	double	sidedist_x;
 	double	sidedist_y;
 	double	deltadist_x;
 	double	deltadist_y;
 	double	perpwalldist;
+	double	wall_x;
+	double	wall_y;
 	int		step_x;
 	int		step_y;
 	int		line_height;
@@ -110,13 +113,19 @@ void	move_back(t_data *data, t_player *player);
 void	move_left(t_data *data, t_player *player);
 void	move_right(t_data *data, t_player *player);
 
-/*+++++++++++ Exec functions +++++++++++++*/
+/*+++++++++++ Raycasting functions +++++++++++++*/
 bool	setup(t_data *data);
+void	calc_ray_pos_dir(t_raycast *ray, t_player *player, int i);
+void	calc_ray_len(t_raycast *ray, t_player *player);
+void	init_ray_len(t_raycast *ray, t_player *player);
+void	calc_line_plane(t_raycast *ray, t_player *player);
+void	calc_line_height(t_raycast *ray);
+double	calc_wall_hit(t_raycast *ray, t_player *player);
+void	ft_raycaster(t_data *data);
 
 /*+++++++++++ Util functions +++++++++++++*/
 void	free_arr(char **arr);
 
 void	test(t_data *cub3d);
-
 
 #endif

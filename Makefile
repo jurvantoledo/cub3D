@@ -18,7 +18,10 @@ SRC =	src/main.c \
 		src/textures/textures.c \
 		src/hooks/hook.c \
 		src/hooks/move_hooks.c \
-		src/exec/setup.c \
+		src/raycasting/setup.c \
+		src/raycasting/raycaster.c \
+		src/raycasting/calc.c \
+		src/raycasting/more_calc.c \
 		src/utils/utils.c \
 		src/error/error.c \
 		include/gnl/get_next_line_utils.c \
