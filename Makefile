@@ -18,6 +18,7 @@ SRC =	src/main.c \
 		src/textures/textures.c \
 		src/hooks/hook.c \
 		src/hooks/move_hooks.c \
+		src/hooks/look_hooks.c \
 		src/raycasting/setup.c \
 		src/raycasting/raycaster.c \
 		src/raycasting/calc.c \

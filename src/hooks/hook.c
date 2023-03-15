@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 14:16:49 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 13:40:48 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/15 15:50:27 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ void	hook(void *param)
 {
 	t_data		*data;
 	t_player	*player;
-	t_map		*map;
-	t_raycast	*ray;
 
 	data = (t_data *)param;
 	player = &data->player;
-	map = &data->map;
-	ray = &data->ray;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		move_forward(data, player);
-	else if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 		move_back(data, player);
-	else if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 		move_left(data, player);
-	else if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 		move_right(data, player);
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+		look_left(data, player);
+	else if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+		look_right(data, player);
 	ft_raycaster(data);
 }
