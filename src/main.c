@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/13 15:29:48 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/15 13:41:23 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,63 +26,58 @@ void	test(t_data *data)
 	while (index < WIDTH)
 	{
 		//calculate ray position and direction
-		double cameraX = 2 * index / (double)WIDTH - 1; //x-coordinate in camera space
-		double rayDirX = player->direction.x + player->plane.x * cameraX;
-		double rayDirY = player->direction.y + player->plane.y * cameraX;
+		ray->camera_x = 2 * index / (double)WIDTH - 1; //x-coordinate in camera space
+		ray->raydir_x = player->direction.x + player->plane.x * ray->camera_x;
+		ray->raydir_y = player->direction.y + player->plane.y * ray->camera_x;
 		//which box of the map we're in
-		int mapX = (int)player->loc.x;
-		int mapY = (int)player->loc.y;
+		ray->map_x = (int)player->loc.x;
+		ray->map_y = (int)player->loc.y;
 		//length of ray from current position to next x or y-side
-		double sideDistX;
-		double sideDistY;
-      	double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-      	double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
-		double perpWallDist;
+      	ray->deltadist_x = sqrt(1 + (ray->raydir_y * ray->raydir_y) / (ray->raydir_x * ray->raydir_x));
+      	ray->deltadist_y = sqrt(1 + (ray->raydir_x * ray->raydir_x) / (ray->raydir_y * ray->raydir_y));
 
 	  //what direction to step in x or y-direction (either +1 or -1)
-		int stepX;
-		int stepY;
 		int hit = 0; //was there a wall hit?
-		int side; //was a NS or a EW wall hit?
+		//was a NS or a EW wall hit?
 		//calculate step and initial sideDist
-		if(rayDirX < 0)
+		if(ray->raydir_x < 0)
 		{
-			stepX = -1;
-			sideDistX = (player->loc.x - mapX) * deltaDistX;
+			ray->step_x = -1;
+			ray->sidedist_x = (player->loc.x - ray->map_x) * ray->deltadist_x;
 		}
 		else
 		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - player->loc.x) * deltaDistX;
+			ray->step_x = 1;
+			ray->sidedist_x = (ray->map_x + 1.0 - player->loc.x) * ray->deltadist_x;
 		}
-		if (rayDirY < 0)
+		if (ray->raydir_y < 0)
 		{
-			stepY = -1;
-			sideDistY = (player->loc.y - mapY) * deltaDistY;
+			ray->step_y = -1;
+			ray->sidedist_y = (player->loc.y - ray->map_y) * ray->deltadist_y;
 		}
 		else
 		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - player->loc.y) * deltaDistY;
+			ray->step_y = 1;
+			ray->sidedist_x = (ray->map_y + 1.0 - player->loc.y) * ray->deltadist_y;
 		}
 		//perform DDA
 		while (hit == 0)
 		{
 			//jump to next map square, either in x-direction, or in y-direction
-			if (sideDistX < sideDistY)
+			if (ray->sidedist_x < ray->sidedist_y)
 			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
+				ray->sidedist_x += ray->deltadist_x;
+				ray->map_x += ray->step_x;
+				ray->side = 0;
 			}
 			else
 			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
+				ray->sidedist_y += ray->deltadist_y;
+				ray->map_y += ray->step_y;
+				ray->side = 1;
 			}
 			//Check if ray has hit a wall
-			if (map->world_map[mapX][mapY] == '1') hit = 1;
+			if (map->world_map[ray->map_x][ray->map_y] == '1') hit = 1;
 		}
 		//Calculate distance projected on camera direction. This is the shortest distance from the point where the wall is
 		//hit to the camera plane. Euclidean to center camera point would give fisheye effect!
@@ -90,54 +85,53 @@ void	test(t_data *data)
 		//for size == 1, but can be simplified to the code below thanks to how sideDist and deltaDist are computed:
 		//because they were left scaled to |rayDir|. sideDist is the entire length of the ray above after the multiple
 		//steps, but we subtract deltaDist once because one step more into the wall was taken above.
-      if(side == 0)
-		perpWallDist = (mapX - player->loc.x + (1 - stepX) / 2) / rayDirX;
+      if(ray->side == 0)
+		ray->perpwalldist = (ray->map_x - player->loc.x + (1 - ray->step_x) / 2) / ray->raydir_x;
       else          
-	  	perpWallDist = (mapY - player->loc.y + (1 - stepY) / 2) / rayDirY;
+	  	ray->perpwalldist = (ray->map_y - player->loc.y + (1 - ray->step_y) / 2) / ray->raydir_y;
 		//Calculate height of line to draw on screen
-		int lineHeight = (int)(HEIGHT / perpWallDist);
+		ray->line_height = (int)(HEIGHT / ray->perpwalldist);
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + HEIGHT / 2;
-		if (drawStart < 0) drawStart = 0;
-		int drawEnd = lineHeight / 2 + HEIGHT / 2;
-		if (drawEnd >= HEIGHT) drawEnd = HEIGHT - 1;
+		ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
+		if (ray->draw_start < 0) ray->draw_start = 0;
+		ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
+		if (ray->draw_end >= HEIGHT) ray->draw_end = HEIGHT - 1;
 		//choose wall color
 		int color = 0x00000000;
-		if (map->world_map[mapX][mapY] == '1')
+		if (map->world_map[ray->map_x][ray->map_y] == '1')
 			color = 0x555555FF;
-		if (color && side == 1)
+		if (color && ray->side == 1)
 			color = 0x999999FF;
 		//draw the pixels of the stripe as a vertical line
 		// verLine(x, drawStart, drawEnd, color);
-		if (drawEnd < 0)
-			drawEnd = HEIGHT - 1;
+		if (ray->draw_end < 0)
+			ray->draw_end = HEIGHT - 1;
 
-		double wallX; //where exactly the wall was hit
-		if(side == 0) wallX = player->loc.y + perpWallDist * rayDirY;
-		else          wallX = player->loc.x + perpWallDist * rayDirX;
-		wallX -= floor(wallX);
+		if(ray->side == 0) ray->wall_x = player->loc.y + ray->perpwalldist * ray->raydir_y;
+		else          ray->wall_x = player->loc.x + ray->perpwalldist * ray->raydir_x;
+		ray->wall_x -= floor(ray->wall_x);
 
 		if (index == WIDTH / 2) {
 			// printf("%d , %d , %d, 0x%X\n", index, drawStart, drawEnd, color);
 			// printf("plane  x %.2f , y %.2f \n", player->plane.x, player->plane.y);
 			// printf("player x %.2f , y %.2f \n", player->direction.x, player->direction.y);
 			// printf("wall x: %.2f\n", wallX);
-			if (!side && rayDirX >= 0)
+			if (!ray->side && ray->raydir_x >= 0)
 				color = 0xFF0000FF; // north
-			else if (!side && rayDirX < 0)
+			else if (!ray->side && ray->raydir_x < 0)
 				color = 0x00FF00FF; // south
-			else if (side && rayDirY >= 0)
+			else if (ray->side && ray->raydir_y >= 0)
 				color = 0x0000FFFF; // west
 			else
 				color = 0xFFFF00FF; // east
 		}
-		if (drawEnd < 0 || drawEnd > HEIGHT || drawStart < 0 || drawStart > HEIGHT)
+		if (ray->draw_end < 0 || ray->draw_end > HEIGHT || ray->draw_start < 0 || ray->draw_start > HEIGHT)
 		{
 			index++;
 			continue ;
 		}
-		int	lol = drawStart;
-		while (lol < drawEnd)
+		int	lol = ray->draw_start;
+		while (lol < ray->draw_end)
 		{
 			mlx_put_pixel(data->foreground, index, lol, color);
 			lol++;
