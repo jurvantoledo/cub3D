@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 15:50:43 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/15 16:15:04 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ char	*remove_lines_until_map(t_data *data, int fd);
 bool	find_textures(t_data *data);
 bool	validate_map(t_data *data);
 
-/*+++++++++++ Error functions +++++++++++++*/
-void	ft_error(char *str, int exit_code);
-
 /*+++++++++++ Hook functions +++++++++++++*/
 void	hook(void *param);
 void	move_forward(t_data *data, t_player *player);
@@ -121,8 +118,15 @@ void	calc_ray_pos_dir(t_raycast *ray, t_player *player, int i);
 void	init_ray_len(t_raycast *ray, t_player *player);
 void	calc_line_plane(t_map *map, t_raycast *ray, t_player *player);
 double	calc_wall_hit(t_raycast *ray, t_player *player);
-void	get_wall_textures(t_raycast *ray, mlx_image_t *image, mlx_texture_t *texture, int w);
+void	get_wall_textures(t_raycast *ray, mlx_image_t *image, \
+						mlx_texture_t *texture, int w);
 void	ft_raycaster(t_data *data);
+
+/*+++++++++++ Error functions +++++++++++++*/
+int		ft_error(char *str, int exit_code);
+
+/*+++++++++++ Free functions +++++++++++++*/
+void	ft_free(t_data *data);
 
 /*+++++++++++ Util functions +++++++++++++*/
 void	free_arr(char **arr);

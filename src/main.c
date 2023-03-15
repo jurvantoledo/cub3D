@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 13:41:23 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/15 16:10:09 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,10 +156,7 @@ int	main(int argc, char *argv[])
 
 	ft_memset(&data, 0, sizeof(data));
 	if (argc < 2 || argc > 2)
-	{
-		printf("%s\n", "More arguments needed");
-		return (EXIT_FAILURE);
-	}
+		return (ft_error("Invalid amount of arguments", EXIT_FAILURE));
 	initialize(&data, argc, argv);
 	parse_map(&data);
 	validate_map(&data);
