@@ -23,8 +23,9 @@ SRC =	src/main.c \
 		src/raycasting/raycaster.c \
 		src/raycasting/calc.c \
 		src/raycasting/get_textures.c \
-		src/utils/utils.c \
 		src/error/error.c \
+		src/free/free.c \
+		src/utils/utils.c \
 		include/gnl/get_next_line_utils.c \
 		include/gnl/get_next_line.c
 

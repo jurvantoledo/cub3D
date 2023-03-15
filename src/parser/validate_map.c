@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 15:05:46 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/09 15:16:35 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/15 17:10:12 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static bool	cnb(t_data *data, int x, int y, const char *illegal)
 
 static bool	check_structure(t_data *data)
 {
-	int		y;
 	int		x;
+	int		y;
 
 	x = 0;
 	while (x < data->map.dimensions.x - 1)

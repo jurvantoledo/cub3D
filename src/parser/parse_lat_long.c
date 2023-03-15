@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 16:02:44 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/08 16:27:00 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/15 17:29:38 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	parse_height(t_data *data)
 
 	fd = open(data->argv[1], O_RDONLY);
 	if (fd < 0)
-		ft_error("File descriptor failed", EXIT_FAILURE);
+		return (ft_error("File descriptor failed", EXIT_FAILURE));
 	str = remove_lines_until_map(data, fd);
 	lines = 0;
 	while (str)
@@ -80,7 +80,7 @@ int	parse_width(t_data *data)
 
 	fd = open(data->argv[1], O_RDONLY);
 	if (fd < 0)
-		ft_error("File descriptor failed", EXIT_FAILURE);
+		return (ft_error("File descriptor failed", EXIT_FAILURE));
 	str = remove_lines_until_map(data, fd);
 	prev_width = 0;
 	total_width = 0;
