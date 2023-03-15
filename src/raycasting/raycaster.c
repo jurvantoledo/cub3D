@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 14:53:32 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 14:21:23 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/15 14:22:48 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,7 @@ static void	dda_algorithm(t_map *map, t_raycast *ray)
 	}
 }
 
-// void	get_walls(t_raycast *ray, t_player *player)
-// {
-// 	ray->perpwalldist = ray->sidedist_x - ray->deltadist_x;
-// 	if (ray->side)
-// 		ray->perpwalldist = ray->sidedist_y - ray->deltadist_y;
-// 	ray->draw_start = -((int)(HEIGHT / ray->perpwalldist)) / 2 + HEIGHT / 2;
-// 	ray->draw_end = ((int)(HEIGHT / ray->perpwalldist)) / 2 + HEIGHT / 2;
-// 	ray->wall_x = player->loc.y + ray->perpwalldist * ray->raydir_y;
-// 	if (ray->side)
-// 		ray->wall_x = player->loc.x + ray->perpwalldist * ray->raydir_x;
-// 	ray->wall_x -= floor(ray->wall_x);
-// 	if (!ray->side && ray->raydir_x >= 0)
-// 		ray->side = 1;
-// 	else if (!ray->side && ray->raydir_x < 0)
-// 		ray->side = 3;
-// 	else if (ray->side && ray->raydir_y >= 0)
-// 		ray->side = 2;
-// 	else
-// 		ray->side = 0;
-// 	if (ray->side > 1)
-// 		ray->wall_x = 1.0 - ray->wall_x;
-// }
-
-void	get_walls(t_raycast *ray)
+static void	get_walls(t_raycast *ray)
 {
 	if (!ray->side && ray->raydir_x >= 0)
 		ray->side = 1;
@@ -115,5 +92,3 @@ void	ft_raycaster(t_data *data)
 	}
 	mlx_image_to_window(data->mlx, data->foreground, 0, 0);
 }
-
-// get_walls(ray, player);

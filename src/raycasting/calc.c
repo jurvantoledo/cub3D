@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 15:11:14 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 13:47:00 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/15 14:23:18 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,6 @@ void	init_ray_len(t_raycast *ray, t_player *player)
 // because one step more into the wall was taken above.
 void	calc_line_plane(t_map *map, t_raycast *ray, t_player *player)
 {
-	int color;
-
-
 	if (ray->side == 0)
 		ray->perpwalldist = (ray->map_x - player->loc.x + \
 							(1 - ray->step_x) / 2) / ray->raydir_x;
@@ -85,16 +82,10 @@ void	calc_line_plane(t_map *map, t_raycast *ray, t_player *player)
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
-	if (ray->draw_end >= HEIGHT) 
+	if (ray->draw_end >= HEIGHT)
 		ray->draw_end = HEIGHT - 1;
-	color = 0x00000000;
-	if (map->world_map[ray->map_x][ray->map_y] == '1')
-		color = 0x555555FF;
-	if (color && ray->side == 1)
-		color = 0x999999FF;
 	if (ray->draw_end < 0)
 		ray->draw_end = HEIGHT - 1;
-
 	if (ray->side == 0)
 		ray->wall_x = player->loc.y + ray->perpwalldist * ray->raydir_y;
 	else
