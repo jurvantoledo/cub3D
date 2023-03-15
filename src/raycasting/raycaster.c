@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 14:53:32 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 14:02:59 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/15 14:21:23 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	ft_raycaster(t_data *data)
 	player = &data->player;
 	map = &data->map;
 	ray = &data->ray;
-	ft_memset(data->foreground->pixels, 0, data->foreground->width * \
-				data->foreground->height * sizeof(int));
+	mlx_delete_image(data->mlx, data->foreground);
+	data->foreground = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	index = 0;
 	while (index < WIDTH)
 	{
@@ -109,9 +109,11 @@ void	ft_raycaster(t_data *data)
 		calc_line_plane(map, ray, player);
 		draw_vert_line(data, ray, index, color);
 		get_walls(ray);
-		get_wall_textures(ray, data->foreground, data->textures[ray->side], index);
+		get_wall_textures(ray, data->foreground, \
+					data->textures[ray->side], index);
 		index++;
 	}
+	mlx_image_to_window(data->mlx, data->foreground, 0, 0);
 }
 
 // get_walls(ray, player);
