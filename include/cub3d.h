@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 16:30:24 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/22 16:54:55 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
-
 typedef struct s_dpos {
 	double	x;
 	double	y;
@@ -39,6 +38,7 @@ typedef struct s_map {
 	t_ipos	dimensions;
 	int		height;
 	int		width;
+	char	**raw_map;
 	char	**world_map;
 	char	*texture[4];
 	int		ceiling;
@@ -76,7 +76,6 @@ typedef struct s_raycast
 	int		texture_x;
 }	t_raycast;
 
-
 typedef struct s_data {
 	int				argc;
 	char			**argv;
@@ -94,14 +93,25 @@ typedef struct s_data {
 }	t_data;
 
 /*+++++++++++ Map Parser functions +++++++++++++*/
-void	parse_map(t_data *data);
-int		parse_height(t_data *data);
-int		parse_width(t_data *data);
-void	parse_textures(t_data *data);
-void	parse_floor_ceiling(t_data *data);
-char	*remove_lines_until_map(t_data *data, int fd);
+// void	parse_map(t_data *data);
+// int		parse_height(t_data *data);
+// int		parse_width(t_data *data);
+// void	parse_textures(t_data *data);
+// void	parse_floor_ceiling(t_data *data);
+// char	*remove_lines_until_map(t_data *data, int fd);
+
+bool	parse_map(t_data *data);
+int		parse_height_new(t_data *data);
+int		parse_width_new(t_data *data);
+int		get_floor_ceiling(t_data *data, char *key);
+char	*get_textures(t_data *data, char *key);
+bool	map_checks(t_data *data);
+int		check_key_data(t_data *data);
 bool	find_textures(t_data *data);
 bool	validate_map(t_data *data);
+
+void	print_parsed_values(t_data *data);
+void	print_world_map(t_data *data);
 
 /*+++++++++++ Hook functions +++++++++++++*/
 void	hook(void *param);

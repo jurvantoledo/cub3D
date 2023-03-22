@@ -8,13 +8,20 @@ MLX_DIR = ./libs/MLX42
 HEADERS	:= -I ./libs/MLX42/include/MLX42
 MLX_LIB	:= $(MLX_DIR)/build/libmlx42.a
 
+# src/parser/parse_map.c \
+# src/parser/parse_textures.c \
+# src/parser/parse_floor_ceiling.c \
+# src/parser/parse_lat_long.c \
+# src/parser/validate_map.c \
 
 SRC =	src/main.c \
-		src/parser/parse_map.c \
-		src/parser/parse_textures.c \
-		src/parser/parse_floor_ceiling.c \
-		src/parser/parse_lat_long.c \
-		src/parser/validate_map.c \
+		src/parser2/parse_map.c \
+		src/parser2/parse_elements.c \
+		src/parser2/parse_height.c \
+		src/parser2/parse_width.c \
+		src/parser2/validate_map.c \
+		src/parser2/print_map.c \
+		src/parser2/checks.c \
 		src/textures/textures.c \
 		src/hooks/hook.c \
 		src/hooks/move_hooks.c \

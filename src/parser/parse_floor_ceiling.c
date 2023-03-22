@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/03 15:21:03 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 16:12:01 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/20 16:12:13 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	get_value(t_data *data, char *str)
 {
 	char	**split_str;
 	char	**split_komma;
-	int		*val;
+	int		val;
 
 	split_str = ft_split(str, ' ');
 	if (!split_str)
@@ -25,14 +25,11 @@ static int	get_value(t_data *data, char *str)
 	if (!split_komma)
 		return (0);
 	free_arr(split_str);
-	val = malloc(sizeof(int));
-	if (!val)
-		return (0);
-	val[0] = (ft_atoi(split_komma[0]) << 24) | \
+	val = (ft_atoi(split_komma[0]) << 24) | \
 	(ft_atoi(split_komma[1]) << 16) | (ft_atoi(split_komma[2]) << 8) | \
 	0x000000FF;
 	free_arr(split_komma);
-	return (val[0]);
+	return (val);
 }
 
 void	parse_floor_ceiling(t_data *data)

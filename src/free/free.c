@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/15 16:13:49 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/16 17:57:27 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/22 17:03:14 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void	ft_free_map(t_map *map)
 {
 	int	i;
 
-	free_arr(map->world_map);
-	i = 4;
+	free_arr(map->raw_map);
+	i = 0;
 	while (i)
 	{
 		free(map->texture[i]);
-		i--;
+		i++;
 	}
 }
 

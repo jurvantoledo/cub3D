@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   textures.c                                         :+:    :+:            */
+/*   parse_height.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/08 14:47:45 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/22 16:50:23 by jvan-tol      ########   odam.nl         */
+/*   Created: 2023/03/22 16:26:29 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2023/03/22 16:53:53 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static bool	load_textures(t_data *data)
+int	parse_height_new(t_data *data)
 {
-	int	i;
+	int	index;
+	int	lines;
 
-	i = 0;
-	while (i < 4)
+	index = check_key_data(data);
+	lines = 0;
+	while (data->map.raw_map[index])
 	{
-		data->textures[i] = mlx_load_png(data->map.texture[i]);
-		if (!data->textures[i])
-		{
-			ft_error("Failed loading the textures", EXIT_FAILURE);
-			return (false);
-		}
-		i++;
+		lines++;
+		index++;
 	}
-	return (true);
-}
-
-bool	find_textures(t_data *data)
-{
-	if (!load_textures(data))
-		return (false);
-	return (true);
+	return (lines);
 }
