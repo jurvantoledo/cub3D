@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/22 16:54:55 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/23 15:23:58 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int		get_floor_ceiling(t_data *data, char *key);
 char	*get_textures(t_data *data, char *key);
 bool	map_checks(t_data *data);
 int		check_key_data(t_data *data);
+bool	check_for_double_komma(char *str, char **arr);
 bool	find_textures(t_data *data);
 bool	validate_map(t_data *data);
 

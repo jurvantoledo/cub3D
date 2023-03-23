@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 14:13:30 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/22 17:08:40 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/23 15:18:25 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static char	**create_map(t_data *data, char *mapline)
 	temptrim = ft_strtrim(mapline, "\n");
 	free(mapline);
 	if (!temptrim)
-		printf("File is not correct");
+		return (NULL);
 	map = ft_split(temptrim, '\n');
 	free(temptrim);
 	if (map == NULL)
-		printf("Malloc map failed");
+		return (NULL);
 	return (map);
 }
 
@@ -60,7 +60,7 @@ char	**get_raw_map(t_data *data)
 	fd = open(data->argv[1], O_RDONLY);
 	line = get_map_utils(data, fd);
 	if (line == NULL)
-		printf("no map");
+		return (NULL);
 	while (line)
 	{
 		str = get_next_line(fd);
@@ -87,17 +87,22 @@ char	**get_world_map(t_data *data)
 
 bool	parse_map(t_data *data)
 {
+	data->map.raw_map = get_raw_map(data);
+	if (!data->map.raw_map)
+		return (false);
 	data->map.texture[0] = get_textures(data, "NO");
 	data->map.texture[1] = get_textures(data, "SO");
 	data->map.texture[2] = get_textures(data, "WE");
 	data->map.texture[3] = get_textures(data, "EA");
 	data->map.floor = get_floor_ceiling(data, "F");
 	data->map.ceiling = get_floor_ceiling(data, "C");
-	data->map.raw_map = get_raw_map(data);
 	if (!map_checks(data))
 		return (false);
 	data->map.height = parse_height_new(data);
 	data->map.width = parse_width_new(data);
 	data->map.world_map = get_world_map(data);
+	if (!data->map.world_map)
+		return (false);
+	print_parsed_values(data);
 	return (true);
 }
