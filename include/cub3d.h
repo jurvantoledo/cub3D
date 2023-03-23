@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/23 15:23:58 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/23 15:59:45 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int		check_key_data(t_data *data);
 bool	check_for_double_komma(char *str, char **arr);
 bool	find_textures(t_data *data);
 bool	validate_map(t_data *data);
+bool	check_world_map(t_data *data);
 
 void	print_parsed_values(t_data *data);
 void	print_world_map(t_data *data);

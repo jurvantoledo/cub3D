@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/22 17:56:16 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/23 15:59:23 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 	if (argc < 2 || argc > 2)
 		return (ft_error("Invalid amount of arguments", EXIT_FAILURE));
 	initialize(&data, argc, argv);
-	if (!parse_map(&data) || !validate_map(&data))
+	if (!parse_map(&data) || !validate_map(&data) || !check_world_map(&data))
 		return (ft_error("Map Error", EXIT_FAILURE));
 	if (!find_textures(&data))
 		return (ft_error("Texture Error", EXIT_FAILURE));

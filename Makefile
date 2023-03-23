@@ -22,6 +22,7 @@ SRC =	src/main.c \
 		src/parser2/validate_map.c \
 		src/parser2/print_map.c \
 		src/parser2/checks.c \
+		src/parser2/check_world_map.c \
 		src/textures/textures.c \
 		src/hooks/hook.c \
 		src/hooks/move_hooks.c \
