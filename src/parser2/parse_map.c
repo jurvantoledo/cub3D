@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 14:13:30 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/23 15:58:02 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/23 16:38:43 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,5 @@ bool	parse_map(t_data *data)
 	data->map.world_map = get_world_map(data);
 	if (!data->map.world_map)
 		return (false);
-	print_parsed_values(data);
 	return (true);
 }
