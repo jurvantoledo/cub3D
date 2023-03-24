@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 14:16:49 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/24 11:29:07 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/24 17:06:11 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static void	move_hooks(t_data *data, t_player *player)
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		move_forward(data, player);
-	else if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 		move_back(data, player);
-	else if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 		move_left(data, player);
-	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 		move_right(data, player);
 }
 
