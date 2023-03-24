@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/23 15:59:23 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/24 11:38:21 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char *argv[])
 {
 	t_data	data;
 
-	ft_memset(&data, 0, sizeof(data));
+	ft_memset(&data, 0, sizeof(t_data));
 	if (argc < 2 || argc > 2)
 		return (ft_error("Invalid amount of arguments", EXIT_FAILURE));
 	initialize(&data, argc, argv);
@@ -34,13 +34,11 @@ int	main(int argc, char *argv[])
 		return (ft_error("Map Error", EXIT_FAILURE));
 	if (!find_textures(&data))
 		return (ft_error("Texture Error", EXIT_FAILURE));
-	setup(&data);
+	if (!setup(&data))
+		return (ft_free(&data, EXIT_FAILURE));
 	mlx_image_to_window(data.mlx, data.background, 0, 0);
-	mlx_image_to_window(data.mlx, data.foreground, 0, 0);
 	mlx_loop_hook(data.mlx, &hook, &data);
 	mlx_loop(data.mlx);
-	ft_free(&data);
-	mlx_terminate(data.mlx);
 	// system("leaks cub3d");
-	return (EXIT_SUCCESS);
+	return (ft_free(&data, EXIT_SUCCESS));
 }

@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/23 15:59:45 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/24 11:37:22 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,9 @@ void	ft_raycaster(t_data *data);
 int		ft_error(char *str, int exit_code);
 
 /*+++++++++++ Free functions +++++++++++++*/
-void	ft_free(t_data *data);
+int		ft_free(t_data *data, int exit_code);
 
 /*+++++++++++ Util functions +++++++++++++*/
 void	free_arr(char **arr);
-
-void	test(t_data *cub3d);
 
 #endif

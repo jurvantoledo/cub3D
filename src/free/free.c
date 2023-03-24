@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/15 16:13:49 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/22 17:53:07 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/24 11:39:09 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,18 @@ static void	ft_free_textures(mlx_texture_t *textures[4])
 static void	ft_free_bg_fg(t_data *data)
 {
 	if (data->background)
-	{
 		mlx_delete_image(data->mlx, data->background);
-	}
 	if (data->foreground)
-	{
 		mlx_delete_image(data->mlx, data->foreground);
-	}
 }
 
-void	ft_free(t_data *data)
+int	ft_free(t_data *data, int exit_code)
 {
 	ft_free_map(&data->map);
 	ft_free_textures(data->textures);
 	ft_free_bg_fg(data);
+	if (data->mlx)
+		mlx_terminate(data->mlx);
+	return (exit_code);
 }
 
