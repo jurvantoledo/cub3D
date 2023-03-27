@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 15:11:14 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 14:23:18 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/27 16:25:24 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,22 @@ void	init_ray_len(t_raycast *ray, t_player *player)
 	{
 		ray->step_x = -1;
 		ray->sidedist_x = (player->loc.x - ray->map_x) * ray->deltadist_x;
-
 	}
 	else
 	{
 		ray->step_x = 1;
 		ray->sidedist_x = (ray->map_x + 1.0 - player->loc.x) * \
 						ray->deltadist_x;
-
 	}
 	if (ray->raydir_y < 0)
 	{
 		ray->step_y = -1;
 		ray->sidedist_y = (player->loc.y - ray->map_y) * ray->deltadist_y;
-
 	}
 	else
 	{
 		ray->step_y = 1;
 		ray->sidedist_y = (ray->map_y + 1.0 - player->loc.y) * ray->deltadist_y;
-
 	}
 }
 
@@ -93,14 +89,13 @@ void	calc_line_plane(t_map *map, t_raycast *ray, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-double	calc_wall_hit(t_raycast *ray, t_player *player)
+void	get_vertical_line_height(t_data *data, t_raycast *ray)
 {
-	double	wall_x;
-
-	if (ray->side == 0)
-		wall_x = player->loc.y + ray->perpwalldist * ray->raydir_y;
-	else
-		ray->wall_x = player->loc.x + ray->perpwalldist * ray->raydir_x;
-	ray->wall_x -= floor(ray->wall_x);
-	return (wall_x);
+	ray->line_height = (int)(HEIGHT / ray->perpwalldist);
+	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
+	// if (ray->draw_start < 0)
+	// 	ray->draw_start = 0;
+	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
+	// if (ray->draw_end >= HEIGHT)
+	// 	ray->draw_end = HEIGHT - 1;
 }

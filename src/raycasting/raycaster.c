@@ -6,23 +6,11 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 14:53:32 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 14:22:48 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/27 16:30:52 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-static void	draw_vert_line(t_data *data, t_raycast *ray, int i, int color)
-{
-	int	lol;
-
-	lol = ray->draw_start;
-	while (lol < ray->draw_end)
-	{
-		mlx_put_pixel(data->foreground, i, lol, color);
-		lol++;
-	}
-}
 
 //	In if statements: jump to next map square, 
 //	either in x-direction, or in y-direction
@@ -52,16 +40,24 @@ static void	dda_algorithm(t_map *map, t_raycast *ray)
 	}
 }
 
-static void	get_walls(t_raycast *ray)
+static void	get_walls(t_raycast *ray, t_player *player)
 {
+	ray->wall_x = player->loc.y + ray->perpwalldist * ray->raydir_y;
+	if (ray->side == 0)
+		ray->wall_x = player->loc.y + ray->perpwalldist * ray->raydir_y;
+	else
+		ray->wall_x = player->loc.x + ray->perpwalldist * ray->raydir_x;
+	ray->wall_x -= floor(ray->wall_x);
 	if (!ray->side && ray->raydir_x >= 0)
-		ray->side = 1;
-	else if (!ray->side && ray->raydir_x < 0)
 		ray->side = 3;
-	else if (ray->side && ray->raydir_y >= 0)
+	else if (!ray->side && ray->raydir_x < 0)
 		ray->side = 2;
+	else if (ray->side && ray->raydir_y >= 0)
+		ray->side = 1;
 	else
 		ray->side = 0;
+	if (ray->side == 1 || ray->side == 2)
+		ray->wall_x = 1.0 - ray->wall_x;
 }
 
 void	ft_raycaster(t_data *data)
@@ -84,8 +80,8 @@ void	ft_raycaster(t_data *data)
 		init_ray_len(ray, player);
 		dda_algorithm(map, ray);
 		calc_line_plane(map, ray, player);
-		draw_vert_line(data, ray, index, color);
-		get_walls(ray);
+		get_vertical_line_height(data, ray);
+		get_walls(ray, player);
 		get_wall_textures(ray, data->foreground, \
 					data->textures[ray->side], index);
 		index++;
