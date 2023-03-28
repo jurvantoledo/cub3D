@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/24 11:38:21 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/28 15:33:59 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,33 @@ void	initialize(t_data *data, int argc, char *argv[])
 	data->rotation_speed = 0.05;
 }
 
+bool	init_parsing_stuff(t_data *data)
+{
+	if (!parse_map(data) || !validate_map(data) || !check_world_map(data))
+		return (ft_error("Map Error", false));
+	if (!find_textures(data))
+		return (ft_error("Texture Error", false));
+	return (true);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data	data;
 
 	ft_memset(&data, 0, sizeof(t_data));
 	if (argc < 2 || argc > 2)
-		return (ft_error("Invalid amount of arguments", EXIT_FAILURE));
+	{
+		ft_error("Invalid amount of arguments", false);
+		return (EXIT_FAILURE);
+	}
 	initialize(&data, argc, argv);
-	if (!parse_map(&data) || !validate_map(&data) || !check_world_map(&data))
-		return (ft_error("Map Error", EXIT_FAILURE));
-	if (!find_textures(&data))
-		return (ft_error("Texture Error", EXIT_FAILURE));
+	if (!init_parsing_stuff(&data))
+		return (ft_free(&data, EXIT_FAILURE));
 	if (!setup(&data))
 		return (ft_free(&data, EXIT_FAILURE));
-	mlx_image_to_window(data.mlx, data.background, 0, 0);
-	mlx_loop_hook(data.mlx, &hook, &data);
+	if (mlx_image_to_window(data.mlx, data.background, 0, 0) < 0 || \
+		mlx_loop_hook(data.mlx, &hook, &data) == false)
+		return (ft_free(&data, EXIT_FAILURE));
 	mlx_loop(data.mlx);
-	// system("leaks cub3d");
 	return (ft_free(&data, EXIT_SUCCESS));
 }

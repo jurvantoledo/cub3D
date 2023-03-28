@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 14:53:32 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/27 16:30:52 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/28 15:21:10 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,18 @@ static void	get_walls(t_raycast *ray, t_player *player)
 		ray->wall_x = 1.0 - ray->wall_x;
 }
 
-void	ft_raycaster(t_data *data)
+void	ft_raycaster(t_data *data, t_player *player)
 {
 	int			index;
-	int			color;
-	t_player	*player;
 	t_map		*map;
 	t_raycast	*ray;
 
-	player = &data->player;
 	map = &data->map;
 	ray = &data->ray;
 	mlx_delete_image(data->mlx, data->foreground);
 	data->foreground = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (data->foreground == NULL)
+		exit(ft_free(data, EXIT_FAILURE));
 	index = 0;
 	while (index < WIDTH)
 	{
@@ -86,5 +85,6 @@ void	ft_raycaster(t_data *data)
 					data->textures[ray->side], index);
 		index++;
 	}
-	mlx_image_to_window(data->mlx, data->foreground, 0, 0);
+	if (mlx_image_to_window(data->mlx, data->foreground, 0, 0) < 0)
+		exit(ft_free(data, EXIT_FAILURE));
 }

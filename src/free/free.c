@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/15 16:13:49 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/24 11:39:09 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/28 15:12:08 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,3 @@ int	ft_free(t_data *data, int exit_code)
 		mlx_terminate(data->mlx);
 	return (exit_code);
 }
-

@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 14:16:49 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/24 17:06:11 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/28 15:21:00 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void	hook(void *param)
 	player = &data->player;
 	move_hooks(data, player);
 	turn_hooks(data, player);
-	ft_raycaster(data);
+	ft_raycaster(data, player);
 }

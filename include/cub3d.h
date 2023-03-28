@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/27 16:12:56 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/28 15:45:15 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ bool	check_for_double_komma(char *str, char **arr);
 bool	find_textures(t_data *data);
 bool	validate_map(t_data *data);
 bool	check_world_map(t_data *data);
+bool	check_rest_of_map(t_data *data);
 
 void	print_parsed_values(t_data *data);
 void	print_world_map(t_data *data);
@@ -132,10 +133,10 @@ void	calc_line_plane(t_map *map, t_raycast *ray, t_player *player);
 void	get_vertical_line_height(t_data *data, t_raycast *ray);
 void	get_wall_textures(t_raycast *ray, mlx_image_t *image, \
 						mlx_texture_t *texture, int w);
-void	ft_raycaster(t_data *data);
+void	ft_raycaster(t_data *data, t_player *player);
 
 /*+++++++++++ Error functions +++++++++++++*/
-int		ft_error(char *str, int exit_code);
+bool	ft_error(char *str, bool ret);
 
 /*+++++++++++ Free functions +++++++++++++*/
 int		ft_free(t_data *data, int exit_code);

@@ -5,63 +5,103 @@
 /*                                                     +:+                    */
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/01 15:10:18 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/15 16:53:46 by jvan-tol      ########   odam.nl         */
+/*   Created: 2023/03/22 14:13:30 by jvan-tol      #+#    #+#                 */
+/*   Updated: 2023/03/23 16:38:43 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void	print_map(t_data *data)
+static char	**create_map(t_data *data, char *mapline)
 {
-	int	test1;
-	int	test2;
+	char	**map;
+	char	*temptrim;
 
-	test1 = 0;
-	while (data->map.world_map[test1])
-	{
-		printf("%s\n", data->map.world_map[test1]);
-		test1++;
-	}
+	temptrim = ft_strtrim(mapline, "\n");
+	free(mapline);
+	if (!temptrim)
+		return (NULL);
+	map = ft_split(temptrim, '\n');
+	free(temptrim);
+	if (map == NULL)
+		return (NULL);
+	return (map);
 }
 
-void	get_map(t_data *data)
+char	*get_map_utils(t_data *data, int fd)
 {
-	int		fd;
+	char	*line;
 	char	*str;
-	int		i;
-	int		j;
 
-	fd = open(data->argv[1], O_RDONLY);
-	if (fd < 0)
-		ft_error("File descriptor failed", EXIT_FAILURE);
-	str = remove_lines_until_map(data, fd);
-	data->map.world_map = ft_calloc(sizeof(char *), data->map.height + 1);
-	i = 0;
-	while (i < data->map.height)
+	line = NULL;
+	str = get_next_line(fd);
+	while (str)
 	{
-		data->map.world_map[i] = ft_calloc(sizeof(char), data->map.width + 1);
-		j = 0;
-		while (j < data->map.width)
+		if (ft_strncmp(str, "\n", 1) != 0)
 		{
-			data->map.world_map[i][j] = str[j];
-			j++;
+			line = ft_strdup(str);
+			free(str);
+			return (line);
 		}
 		free(str);
 		str = get_next_line(fd);
-		i++;
 	}
-	print_map(data);
-	close(fd);
+	free(str);
+	return (line);
 }
 
-void	parse_map(t_data *data)
+char	**get_raw_map(t_data *data)
 {
-	parse_textures(data);
-	parse_floor_ceiling(data);
-	data->map.height = parse_height(data);
-	printf("Map height: %d\n", data->map.height);
-	data->map.width = parse_width(data);
-	printf("Map width: %d\n", data->map.width);
-	get_map(data);
+	int		fd;
+	char	*str;
+	char	*line;
+	char	*newline;
+
+	fd = open(data->argv[1], O_RDONLY);
+	line = get_map_utils(data, fd);
+	if (line == NULL)
+		return (NULL);
+	while (line)
+	{
+		str = get_next_line(fd);
+		if (!str)
+			break ;
+		newline = line;
+		line = ft_strjoin(newline, str);
+		free(newline);
+		free(str);
+	}
+	free(str);
+	return (create_map(data, line));
+}
+
+char	**get_world_map(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+		i++;
+	return (&data->map.raw_map[i]);
+}
+
+bool	parse_map(t_data *data)
+{
+	data->map.raw_map = get_raw_map(data);
+	if (!data->map.raw_map)
+		return (false);
+	data->map.texture[0] = get_textures(data, "NO");
+	data->map.texture[1] = get_textures(data, "SO");
+	data->map.texture[2] = get_textures(data, "WE");
+	data->map.texture[3] = get_textures(data, "EA");
+	data->map.floor = get_floor_ceiling(data, "F");
+	data->map.ceiling = get_floor_ceiling(data, "C");
+	if (!map_checks(data))
+		return (false);
+	data->map.height = parse_height_new(data);
+	data->map.width = parse_width_new(data);
+	data->map.world_map = get_world_map(data);
+	if (!data->map.world_map)
+		return (false);
+	return (true);
 }
