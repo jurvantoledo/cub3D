@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 15:11:14 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/27 16:25:24 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/29 14:23:40 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_ray_len(t_raycast *ray, t_player *player)
 // is the entire length of the ray above after the multiple
 // steps, but we subtract deltaDist once 
 // because one step more into the wall was taken above.
-void	calc_line_plane(t_map *map, t_raycast *ray, t_player *player)
+void	calc_line_plane(t_raycast *ray, t_player *player)
 {
 	if (ray->side == 0)
 		ray->perpwalldist = (ray->map_x - player->loc.x + \
@@ -89,13 +89,9 @@ void	calc_line_plane(t_map *map, t_raycast *ray, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-void	get_vertical_line_height(t_data *data, t_raycast *ray)
+void	get_vertical_line_height(t_raycast *ray)
 {
 	ray->line_height = (int)(HEIGHT / ray->perpwalldist);
 	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
-	// if (ray->draw_start < 0)
-	// 	ray->draw_start = 0;
 	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
-	// if (ray->draw_end >= HEIGHT)
-	// 	ray->draw_end = HEIGHT - 1;
 }

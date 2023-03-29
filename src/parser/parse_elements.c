@@ -6,13 +6,13 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 10:57:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/23 15:23:34 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/29 14:22:38 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	get_value(t_data *data, char *str)
+static int	get_value(char *str)
 {
 	char	**split_str;
 	char	**split_komma;
@@ -51,7 +51,7 @@ int	get_floor_ceiling(t_data *data, char *key)
 	while (str)
 	{
 		if (ft_strncmp(str, key, 1) == 0)
-			val = get_value(data, str);
+			val = get_value(str);
 		free(str);
 		str = get_next_line(fd);
 	}
@@ -59,7 +59,7 @@ int	get_floor_ceiling(t_data *data, char *key)
 	return (val);
 }
 
-static char	*parse_textures_new(t_data *data, char *str)
+static char	*parse_textures_new(char *str)
 {
 	char	*val;
 	char	**new_str;
@@ -115,7 +115,7 @@ char	*get_textures(t_data *data, char *key)
 	while (str)
 	{
 		if (ft_strncmp(str, key, 2) == 0)
-			val = parse_textures_new(data, str);
+			val = parse_textures_new(str);
 		free(str);
 		str = get_next_line(fd);
 	}

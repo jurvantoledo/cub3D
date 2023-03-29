@@ -6,13 +6,13 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 14:13:30 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/23 16:38:43 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/29 14:22:04 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static char	**create_map(t_data *data, char *mapline)
+static char	**create_map(char *mapline)
 {
 	char	**map;
 	char	*temptrim;
@@ -28,7 +28,7 @@ static char	**create_map(t_data *data, char *mapline)
 	return (map);
 }
 
-char	*get_map_utils(t_data *data, int fd)
+char	*get_map_utils(int fd)
 {
 	char	*line;
 	char	*str;
@@ -58,7 +58,7 @@ char	**get_raw_map(t_data *data)
 	char	*newline;
 
 	fd = open(data->argv[1], O_RDONLY);
-	line = get_map_utils(data, fd);
+	line = get_map_utils(fd);
 	if (line == NULL)
 		return (NULL);
 	while (line)
@@ -72,7 +72,7 @@ char	**get_raw_map(t_data *data)
 		free(str);
 	}
 	free(str);
-	return (create_map(data, line));
+	return (create_map(line));
 }
 
 char	**get_world_map(t_data *data)

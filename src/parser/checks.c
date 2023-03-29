@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 15:50:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/24 11:06:13 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/29 14:23:01 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	check_for_data(t_data *data)
 	return (true);
 }
 
-static bool	check_keys(t_data *data, char *mapline, char *key)
+static bool	check_keys(char *mapline, char *key)
 {
 	if (ft_strncmp(mapline, key, 2) == 0 || ft_strncmp(mapline, key, 1) == 0)
 		return (true);
@@ -57,12 +57,12 @@ int	check_key_data(t_data *data)
 	count = 0;
 	while (index < 6)
 	{
-		if (check_keys(data, data->map.raw_map[index], "NO") || \
-			check_keys(data, data->map.raw_map[index], "SO") || \
-			check_keys(data, data->map.raw_map[index], "WE") || \
-			check_keys(data, data->map.raw_map[index], "EA") || \
-			check_keys(data, data->map.raw_map[index], "F") || \
-			check_keys(data, data->map.raw_map[index], "C"))
+		if (check_keys(data->map.raw_map[index], "NO") || \
+			check_keys(data->map.raw_map[index], "SO") || \
+			check_keys(data->map.raw_map[index], "WE") || \
+			check_keys(data->map.raw_map[index], "EA") || \
+			check_keys(data->map.raw_map[index], "F") || \
+			check_keys(data->map.raw_map[index], "C"))
 			count++;
 		index++;
 	}

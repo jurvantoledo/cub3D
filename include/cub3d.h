@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/28 15:45:15 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/29 14:23:59 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ void	look_right(t_data *data, t_player *player);
 bool	setup(t_data *data);
 void	calc_ray_pos_dir(t_raycast *ray, t_player *player, int i);
 void	init_ray_len(t_raycast *ray, t_player *player);
-void	calc_line_plane(t_map *map, t_raycast *ray, t_player *player);
-void	get_vertical_line_height(t_data *data, t_raycast *ray);
+void	calc_line_plane(t_raycast *ray, t_player *player);
+void	get_vertical_line_height(t_raycast *ray);
 void	get_wall_textures(t_raycast *ray, mlx_image_t *image, \
 						mlx_texture_t *texture, int w);
 void	ft_raycaster(t_data *data, t_player *player);

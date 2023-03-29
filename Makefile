@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = gcc
-FLAGS = 
+FLAGS = -Wall -Werror -Wextra
 LFLAGS := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 
 LIBFT = include/libft

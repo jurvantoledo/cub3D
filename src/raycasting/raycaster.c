@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 14:53:32 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/28 15:21:10 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/29 14:24:35 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	ft_raycaster(t_data *data, t_player *player)
 		calc_ray_pos_dir(ray, player, index);
 		init_ray_len(ray, player);
 		dda_algorithm(map, ray);
-		calc_line_plane(map, ray, player);
-		get_vertical_line_height(data, ray);
+		calc_line_plane(ray, player);
+		get_vertical_line_height(ray);
 		get_walls(ray, player);
 		get_wall_textures(ray, data->foreground, \
 					data->textures[ray->side], index);
