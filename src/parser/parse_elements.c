@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 10:57:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/29 14:22:38 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/29 17:47:27 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ static int	get_value(char *str)
 		return (0);
 	split_komma = ft_split(split_str[1], ',');
 	if (!split_komma)
+	{
+		free_arr(split_str);
 		return (0);
+	}
 	free_arr(split_str);
-	if (!check_for_double_komma(str, split_komma))
+	if (!check_for_double_komma(str, split_komma) || \
+		check_colors(split_komma))
 	{
 		free_arr(split_komma);
 		return (0);
