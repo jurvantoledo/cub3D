@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/30 16:32:55 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/30 17:02:32 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static bool	init_parsing_stuff(t_data *data)
 int	main(int argc, char *argv[])
 {
 	t_data	data;
-	t_ipos	pos;
 
 	ft_memset(&data, 0, sizeof(t_data));
 	if (argc < 2 || argc > 2)
