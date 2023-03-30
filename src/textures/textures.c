@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 14:47:45 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/22 16:50:23 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/30 16:45:23 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static bool	load_textures(t_data *data)
 		data->textures[i] = mlx_load_png(data->map.texture[i]);
 		if (!data->textures[i])
 		{
-			ft_error("Failed loading the textures", EXIT_FAILURE);
 			return (false);
 		}
 		i++;

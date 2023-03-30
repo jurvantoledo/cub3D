@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 15:50:38 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/30 12:26:21 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/30 16:49:02 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static bool	check_side_walls(t_data *data)
 	int		i;
 
 	i = 1;
-
 	while (i < data->map.height)
 	{
 		if (!check_left_wall(data, i))
