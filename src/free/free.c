@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/15 16:13:49 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/28 15:12:08 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/30 11:41:15 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static void	ft_free_bg_fg(t_data *data)
 
 int	ft_free(t_data *data, int exit_code)
 {
-	ft_free_map(&data->map);
+	if (data->map.raw_map)
+		ft_free_map(&data->map);
 	ft_free_textures(data->textures);
 	ft_free_bg_fg(data);
 	if (data->mlx)

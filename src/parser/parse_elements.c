@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 10:57:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/29 17:47:27 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/30 11:45:45 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_floor_ceiling(t_data *data, char *key)
 
 	fd = open(data->argv[1], O_RDONLY);
 	if (!fd)
-		return (ft_error("File descrtiptor failed", EXIT_FAILURE));
+		return (0);
 	str = get_next_line(fd);
 	val = 0;
 	while (str)
@@ -111,10 +111,7 @@ char	*get_textures(t_data *data, char *key)
 		return (NULL);
 	fd = open(data->argv[1], O_RDONLY);
 	if (!fd)
-	{
-		ft_error("File descriptor failed", EXIT_FAILURE);
 		return (NULL);
-	}
 	str = get_next_line(fd);
 	while (str)
 	{

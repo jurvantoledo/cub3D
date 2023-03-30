@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 15:05:46 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/22 16:42:54 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/30 15:18:13 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ static bool	check_players(t_data *data)
 
 static bool	cnb(t_data *data, int x, int y, const char *illegal)
 {
-	if (ft_strchr(illegal, data->map.world_map[x + 1][y]))
+	if (ft_strchr(illegal, data->map.world_map[y + 1][x]))
 		return (false);
-	if (ft_strchr(illegal, data->map.world_map[x][y + 1]))
+	if (ft_strchr(illegal, data->map.world_map[y][x + 1]))
 		return (false);
 	return (true);
 }
@@ -83,23 +83,23 @@ static bool	check_structure(t_data *data)
 	int		x;
 	int		y;
 
-	x = 0;
-	while (x < data->map.dimensions.x - 1)
+	y = 0;
+	while (y < data->map.dimensions.y - 1)
 	{
-		y = 0;
-		while (y < data->map.dimensions.y - 1)
+		x = 0;
+		while (x < data->map.dimensions.x - 1)
 		{
-			if ((data->map.world_map[x][y] == ' ' && !cnb(data, x, y, "0NESW")) \
-				|| (data->map.world_map[x][y] == '0' && \
+			if ((data->map.world_map[y][x] == ' ' && !cnb(data, x, y, "0NESW")) \
+				|| (data->map.world_map[y][x] == '0' && \
 					!cnb(data, x, y, " ")) || \
-				(data->map.world_map[x][y] == 'N' && !cnb(data, x, y, " ")) || \
-				(data->map.world_map[x][y] == 'E' && !cnb(data, x, y, " ")) || \
-				(data->map.world_map[x][y] == 'S' && !cnb(data, x, y, " ")) || \
-				(data->map.world_map[x][y] == 'W' && !cnb(data, x, y, " ")))
+				(data->map.world_map[y][x] == 'N' && !cnb(data, x, y, " ")) || \
+				(data->map.world_map[y][x] == 'E' && !cnb(data, x, y, " ")) || \
+				(data->map.world_map[y][x] == 'S' && !cnb(data, x, y, " ")) || \
+				(data->map.world_map[y][x] == 'W' && !cnb(data, x, y, " ")))
 				return (false);
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 	return (true);
 }

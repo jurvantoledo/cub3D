@@ -6,23 +6,32 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/29 17:48:33 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/30 16:32:55 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	initialize(t_data *data, int argc, char *argv[])
+static bool	arg_checker(char **argv)
+{
+	if (ft_strlen(argv[1]) < 5)
+		return (false);
+	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4))
+		return (false);
+	return (true);
+}
+
+static void	initialize(t_data *data, int argc, char *argv[])
 {
 	data->argc = argc;
 	data->argv = argv;
 	data->plane.x = 0;
 	data->plane.y = -0.66;
-	data->move_speed = 0.045;
-	data->rotation_speed = 0.05;
+	data->move_speed = 0.050;
+	data->rotation_speed = 0.10;
 }
 
-bool	init_parsing_stuff(t_data *data)
+static bool	init_parsing_stuff(t_data *data)
 {
 	if (!parse_map(data) || !validate_map(data) || !check_world_map(data))
 		return (ft_error("Map Error", false));
@@ -34,11 +43,17 @@ bool	init_parsing_stuff(t_data *data)
 int	main(int argc, char *argv[])
 {
 	t_data	data;
+	t_ipos	pos;
 
 	ft_memset(&data, 0, sizeof(t_data));
 	if (argc < 2 || argc > 2)
 	{
 		ft_error("Invalid amount of arguments", false);
+		return (EXIT_FAILURE);
+	}
+	if (!arg_checker(argv))
+	{
+		ft_error("Invalid filename", false);
 		return (EXIT_FAILURE);
 	}
 	initialize(&data, argc, argv);

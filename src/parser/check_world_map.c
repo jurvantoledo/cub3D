@@ -6,52 +6,64 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 15:50:38 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/28 15:44:39 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/30 12:26:21 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static bool	check_left_wall(t_data *data)
+static bool	check_left_wall(t_data *data, int k)
 {
 	size_t	i;
 
 	i = 0;
-	while (data->map.world_map[i])
+	while (i < ft_strlen(data->map.world_map[k]))
 	{
-		if (data->map.world_map[i][0] != '1')
+		if (data->map.world_map[k][i] != '1')
 		{
-			if (data->map.world_map[i][0] == '0')
+			if (data->map.world_map[k][i] == '0')
 				return (false);
 		}
+		else
+			break ;
 		i++;
 	}
 	return (true);
 }
 
-static bool	check_right_wall(t_data *data)
+static bool	check_right_wall(t_data *data, int i)
 {
-	size_t	i;
+	size_t	k;
 
-	i = 0;
-	while (data->map.world_map[i])
+	k = ft_strlen(data->map.world_map[i]);
+	while (1)
 	{
-		if (data->map.world_map[i][data->map.width - 1] != '1')
+		if (data->map.world_map[i][k] != '1')
 		{
-			if (data->map.world_map[i][data->map.width - 1] == '0')
+			if (data->map.world_map[i][k] == '0')
 				return (false);
 		}
-		i++;
+		else
+			break ;
+		k--;
 	}
 	return (true);
 }
 
 static bool	check_side_walls(t_data *data)
 {
-	if (!check_left_wall(data))
-		return (false);
-	if (!check_right_wall(data))
-		return (false);
+	int		i;
+
+	i = 1;
+
+	while (i < data->map.height)
+	{
+		if (!check_left_wall(data, i))
+			return (false);
+		if (!check_right_wall(data, i))
+			return (false);
+		i++;
+	}
 	return (true);
 }
 
@@ -85,8 +97,6 @@ bool	check_world_map(t_data *data)
 	if (!check_first_last_line(data))
 		return (false);
 	if (!check_side_walls(data))
-		return (false);
-	if (!check_rest_of_map(data))
 		return (false);
 	return (true);
 }
