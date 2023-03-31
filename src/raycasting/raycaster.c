@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 14:53:32 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/30 15:25:14 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/03/31 17:05:32 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ static void	get_walls(t_raycast *ray, t_player *player)
 		ray->wall_x = player->loc.x + ray->perpwalldist * ray->raydir_x;
 	ray->wall_x -= floor(ray->wall_x);
 	if (!ray->side && ray->raydir_x >= 0)
-		ray->side = 3;
-	else if (!ray->side && ray->raydir_x < 0)
 		ray->side = 2;
+	else if (!ray->side && ray->raydir_x < 0)
+		ray->side = 3;
 	else if (ray->side && ray->raydir_y >= 0)
-		ray->side = 1;
-	else
 		ray->side = 0;
-	if (ray->side == 1)
+	else
+		ray->side = 1;
+	if (ray->side == 3)
 		ray->wall_x = 1.0 - ray->wall_x;
 }
 
