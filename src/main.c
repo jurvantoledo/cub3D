@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/30 17:19:18 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/04 15:55:23 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	initialize(t_data *data, int argc, char *argv[])
 static bool	init_parsing_stuff(t_data *data)
 {
 	if (!parse_map(data) || !validate_map(data) || !check_world_map(data))
-		return (ft_error("Map Error", false));
+		return (ft_error("Map Error\n", false));
 	if (!find_textures(data))
-		return (ft_error("Texture Error", false));
+		return (ft_error("Texture Error\n", false));
 	return (true);
 }
 
@@ -47,12 +47,12 @@ int	main(int argc, char *argv[])
 	ft_memset(&data, 0, sizeof(t_data));
 	if (argc < 2 || argc > 2)
 	{
-		ft_error("Invalid amount of arguments", false);
+		ft_error("Invalid amount of arguments\n", false);
 		return (EXIT_FAILURE);
 	}
 	if (!arg_checker(argv))
 	{
-		ft_error("Invalid filename", false);
+		ft_error("Invalid filename\n", false);
 		return (EXIT_FAILURE);
 	}
 	initialize(&data, argc, argv);
