@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 10:57:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/05 10:46:55 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/05 12:08:32 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	*parse_textures_new(char *str)
 	char	**new_str;
 
 	new_str = ft_split(str, ' ');
-	if (!new_str)
+	if (!new_str || !new_str[1])
 		return (NULL);
 	val = ft_strdup(new_str[1]);
 	if (!val)

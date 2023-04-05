@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 14:47:45 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/30 16:45:23 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/05 12:11:03 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static bool	load_textures(t_data *data)
 	{
 		data->textures[i] = mlx_load_png(data->map.texture[i]);
 		if (!data->textures[i])
-		{
 			return (false);
-		}
 		i++;
 	}
 	return (true);
