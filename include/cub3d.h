@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/04 17:25:24 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/05 18:40:18 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,6 @@ typedef struct s_data {
 }	t_data;
 
 /*+++++++++++ Map Parser functions +++++++++++++*/
-// void	parse_map(t_data *data);
-// int		parse_height(t_data *data);
-// int		parse_width(t_data *data);
-// void	parse_textures(t_data *data);
-// void	parse_floor_ceiling(t_data *data);
-// char	*remove_lines_until_map(t_data *data, int fd);
-
 bool	parse_map(t_data *data);
 int		parse_height_new(t_data *data);
 int		parse_width_new(t_data *data);
@@ -111,11 +104,9 @@ bool	check_for_double_komma(char *str, char **arr);
 bool	find_textures(t_data *data);
 bool	validate_map(t_data *data);
 bool	check_world_map(t_data *data);
-bool	check_rest_of_map(t_data *data);
 bool	check_empty_and_zero(t_data *data);
-
-void	print_parsed_values(t_data *data);
-void	print_world_map(t_data *data);
+bool	check_floor_ceiling_data(char *str);
+bool	check_split_val(char **arr);
 
 /*+++++++++++ Hook functions +++++++++++++*/
 void	hook(void *param);
@@ -146,5 +137,6 @@ int		ft_free(t_data *data, int exit_code);
 void	free_arr(char **arr);
 bool	check_colors(char **arr);
 bool	check_location(t_data *data, double x, double y);
+char	*ft_remove_spaces_and_key(char *str);
 
 #endif

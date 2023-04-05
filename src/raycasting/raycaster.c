@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 14:53:32 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/31 17:05:32 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/05 14:57:48 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	get_walls(t_raycast *ray, t_player *player)
 		ray->side = 0;
 	else
 		ray->side = 1;
-	if (ray->side == 3)
+	if (ray->side == 3 || ray->side == 0)
 		ray->wall_x = 1.0 - ray->wall_x;
 }
 

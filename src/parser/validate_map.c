@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/08 15:05:46 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/05 11:19:34 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/05 13:07:05 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static bool	cnb(t_data *data, int x, int y, const char *illegal)
 	return (true);
 }
 
-static bool	check_structure(t_data *data)
+static bool	check_map_structure(t_data *data)
 {
 	int		x;
 	int		y;
@@ -108,7 +108,7 @@ bool	validate_map(t_data *data)
 {
 	if (!check_players(data))
 		return (false);
-	if (!check_structure(data))
+	if (!check_map_structure(data))
 		return (false);
 	return (true);
 }

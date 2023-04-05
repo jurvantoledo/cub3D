@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 10:57:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/05 12:08:32 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/05 18:29:40 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,18 @@
 
 static int	get_value(char *str)
 {
-	char	**split_str;
 	char	**split_komma;
 	int		val;
+	char	*new_str;
 
-	split_str = ft_split(str, ' ');
-	if (!split_str)
+	if (!check_floor_ceiling_data(str))
 		return (0);
-	split_komma = ft_split(split_str[1], ',');
+	new_str = ft_remove_spaces_and_key(str);
+	split_komma = ft_split(new_str, ',');
 	if (!split_komma)
-	{
-		free_arr(split_str);
 		return (0);
-	}
-	free_arr(split_str);
 	if (!check_for_double_komma(str, split_komma) || \
-		check_colors(split_komma))
+		check_colors(split_komma) || !check_split_val(split_komma))
 	{
 		free_arr(split_komma);
 		return (0);
@@ -37,6 +33,7 @@ static int	get_value(char *str)
 	val = (ft_atoi(split_komma[0]) << 24) | \
 			(ft_atoi(split_komma[1]) << 16) | (ft_atoi(split_komma[2]) << 8) | \
 			0x000000FF;
+	free(new_str);
 	free_arr(split_komma);
 	return (val);
 }
@@ -73,7 +70,10 @@ static char	*parse_textures_new(char *str)
 		return (NULL);
 	val = ft_strdup(new_str[1]);
 	if (!val)
+	{
+		free_arr(new_str);
 		return (NULL);
+	}
 	val[ft_strlen(new_str[1]) - 1] = '\0';
 	free_arr(new_str);
 	return (val);
@@ -98,7 +98,7 @@ static bool	count_textures(t_data *data)
 		free(str);
 		str = get_next_line(fd);
 	}
-	if (count > 4)
+	if (count > 4 || count < 4)
 		return (false);
 	return (true);
 }
@@ -117,7 +117,7 @@ char	*get_textures(t_data *data, char *key)
 	str = get_next_line(fd);
 	while (str)
 	{
-		if (ft_strncmp(str, key, 2) == 0)
+		if (ft_strncmp(str, key, ft_strlen(key)) == 0)
 			val = parse_textures_new(str);
 		free(str);
 		str = get_next_line(fd);

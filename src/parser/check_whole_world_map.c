@@ -6,11 +6,31 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/28 15:44:50 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/05 11:43:49 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/05 16:27:09 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+bool	check_split_val(char **arr)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (arr[i])
+	{
+		j = 0;
+		while (arr[i][j])
+		{
+			if (!ft_isdigit(arr[i][j]))
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
+}
 
 static bool	char_checks(t_data *data, int i, size_t j)
 {

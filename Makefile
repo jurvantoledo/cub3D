@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 LFLAGS := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
@@ -6,7 +6,7 @@ LFLAGS := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 LIBFT = include/libft
 MLX_DIR = ./libs/MLX42
 HEADERS	:= -I ./libs/MLX42/include/MLX42
-MLX_LIB	:= $(MLX_DIR)/build/libmlx42.a
+MLX_LIB	:= $(MLX_DIR)/libmlx42.a
 
 SRC =	src/main.c \
 		src/parser/parse_map.c \
@@ -14,7 +14,6 @@ SRC =	src/main.c \
 		src/parser/parse_height.c \
 		src/parser/parse_width.c \
 		src/parser/validate_map.c \
-		src/parser/print_map.c \
 		src/parser/checks.c \
 		src/parser/check_world_map.c \
 		src/parser/check_whole_world_map.c \
