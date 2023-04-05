@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 10:57:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/30 11:45:45 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/05 10:46:55 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static char	*parse_textures_new(char *str)
 	if (!new_str)
 		return (NULL);
 	val = ft_strdup(new_str[1]);
+	if (!val)
+		return (NULL);
 	val[ft_strlen(new_str[1]) - 1] = '\0';
 	free_arr(new_str);
 	return (val);
