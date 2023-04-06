@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/13 15:11:14 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/30 15:17:27 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/06 11:38:31 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,4 @@ void	calc_line_plane(t_raycast *ray, t_player *player)
 	ray->line_height = (int)(HEIGHT / ray->perpwalldist);
 	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
 	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
-	if (ray->side == 0)
-		ray->wall_x = player->loc.y + ray->perpwalldist * ray->raydir_y;
-	else
-		ray->wall_x = player->loc.x + ray->perpwalldist * ray->raydir_x;
-	ray->wall_x -= floor(ray->wall_x);
 }

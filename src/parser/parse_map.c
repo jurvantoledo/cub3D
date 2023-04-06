@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 14:13:30 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/05 15:28:45 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/06 12:11:58 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ static char	**create_map(char *mapline)
 	if (!temptrim)
 		return (NULL);
 	map = ft_split(temptrim, '\n');
-	free(temptrim);
 	if (map == NULL)
+	{
+		free(temptrim);
 		return (NULL);
+	}
+	free(temptrim);
 	return (map);
 }
 
@@ -74,6 +77,7 @@ char	**get_raw_map(t_data *data)
 		free(str);
 	}
 	free(str);
+	close(fd);
 	return (create_map(line));
 }
 

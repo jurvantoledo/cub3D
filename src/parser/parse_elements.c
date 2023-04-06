@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 10:57:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/05 18:29:40 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/06 12:10:39 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static bool	count_textures(t_data *data)
 		free(str);
 		str = get_next_line(fd);
 	}
+	close(fd);
 	if (count > 4 || count < 4)
 		return (false);
 	return (true);

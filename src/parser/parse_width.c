@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 16:27:19 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/03/22 16:54:01 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/06 13:33:56 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int	parse_width_new(t_data *data)
 	int	total_width;
 	int	index;
 
-	index = check_key_data(data);
+	if (check_key_data(data) != 0)
+		index = check_key_data(data);
+	else
+		return (0);
 	prev_width = 0;
 	total_width = 0;
 	while (data->map.raw_map[index])
