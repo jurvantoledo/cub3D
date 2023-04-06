@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 15:50:38 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/05 11:36:22 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/06 17:14:14 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ static bool	check_right_wall(t_data *data, int i)
 {
 	size_t	k;
 
-	k = ft_strlen(data->map.world_map[i]);
+	k = ft_strlen(data->map.world_map[i]) - 1;
 	while (1)
 	{
 		if (data->map.world_map[i][k] != '1')
 		{
-			if (data->map.world_map[i][k] == '0')
-				return (false);
+			return (false);
 		}
 		else
 			break ;
@@ -98,6 +97,8 @@ bool	check_world_map(t_data *data)
 	if (!check_side_walls(data))
 		return (false);
 	if (!check_empty_and_zero(data))
+		return (false);
+	if (check_whole_map(data) == false)
 		return (false);
 	return (true);
 }
