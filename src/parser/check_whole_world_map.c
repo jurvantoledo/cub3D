@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/28 15:44:50 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/06 17:14:41 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/07 14:05:41 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool	check_whole_map(t_data *data)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (i < data->map.height)
 	{
 		j = 0;

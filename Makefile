@@ -17,6 +17,7 @@ SRC =	src/main.c \
 		src/parser/checks.c \
 		src/parser/check_world_map.c \
 		src/parser/check_whole_world_map.c \
+		src/parser/remove_newline_in_map.c \
 		src/textures/textures.c \
 		src/hooks/hook.c \
 		src/hooks/move_hooks.c \
