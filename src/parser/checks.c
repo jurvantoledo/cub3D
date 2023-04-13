@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 15:50:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/05 16:36:32 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/13 16:12:51 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ bool	check_for_double_komma(char *str, char **arr)
 
 static bool	check_for_data(t_data *data)
 {
-	if ((data->map.texture[0] == NULL || data->map.texture[1] == NULL) \
-		|| data->map.texture[2] == NULL || data->map.texture[3] == NULL \
-		|| data->map.floor == 0 || data->map.ceiling == 0)
+	if ((data->map.texture[0] == NULL && data->map.texture[1] == NULL) \
+		&& data->map.texture[2] == NULL && data->map.texture[3] == NULL \
+		&& data->map.floor == 0 && data->map.ceiling == 0)
+	{
 		return (false);
+	}
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:23 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/07 14:06:20 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/13 16:56:46 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ bool	check_floor_ceiling_data(char *str);
 bool	check_split_val(char **arr);
 bool	check_whole_map(t_data *data);
 bool	check_empty_line_map(t_data *data);
+bool	count_textures(t_data *data);
 
 /*+++++++++++ Hook functions +++++++++++++*/
 void	hook(void *param);

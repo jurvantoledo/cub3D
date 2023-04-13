@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/07 14:05:56 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/07 14:16:08 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/13 17:07:12 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ bool	check_empty_line_map(t_data *data)
 	while (str && k < data->map.height)
 	{
 		if (!check_str_lines_for_newline(str))
+		{
+			free(str);
 			return (false);
+		}
 		k++;
 		free(str);
 		str = get_next_line(fd);

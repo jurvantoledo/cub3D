@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 10:57:31 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/07 13:14:49 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/13 16:56:52 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,30 +79,43 @@ static char	*parse_textures_new(char *str)
 	return (val);
 }
 
-static bool	count_textures(t_data *data)
-{
-	char	*str;
-	int		fd;
-	int		count;
+// bool	fml(t_data *data, int *poep)
+// {
+// 	char	*str;
+// 	int		fd;
 
-	fd = open(data->argv[1], O_RDONLY);
-	if (!fd)
-		return (ft_error("File descriptor failed", EXIT_FAILURE));
-	str = get_next_line(fd);
-	count = 0;
-	while (str)
-	{
-		if (ft_strncmp(str, "SO", 2) == 0 || ft_strncmp(str, "NO", 2) == 0 || \
-			ft_strncmp(str, "WE", 2) == 0 || ft_strncmp(str, "EA", 2) == 0)
-			count++;
-		free(str);
-		str = get_next_line(fd);
-	}
-	close(fd);
-	if (count > 4 || count < 4)
-		return (false);
-	return (true);
-}
+// 	fd = open(data->argv[1], O_RDONLY);
+// 	if (!fd)
+// 		return (ft_error("File descriptor failed", EXIT_FAILURE));
+// 	str = get_next_line(fd);
+// 	while (str)
+// 	{
+// 		if (ft_strncmp(str, "NO", 2) == 0)
+// 			poep[0] += 1;
+// 		else if (ft_strncmp(str, "SO", 2) == 0)
+// 			poep[1] += 1;
+// 		else if (ft_strncmp(str, "WE", 2) == 0)
+// 			poep[2] += 1;
+// 		else if (ft_strncmp(str, "EA", 2) == 0)
+// 			poep[3] += 1;
+// 		free(str);
+// 		str = get_next_line(fd);
+// 	}
+// 	close(fd);
+// 	if (poep[0] != 1 || poep[1] != 1 || poep[2] != 1 || poep[3] != 1)
+// 		return (false);
+// 	return (true);
+// }
+
+// static bool	count_textures(t_data *data)
+// {
+// 	int		poep[4];
+
+// 	ft_memset(poep, 0, sizeof(poep));
+// 	if (test_lol(data, poep) == false)
+// 		return (false);
+// 	return (true);
+// }
 
 char	*get_textures(t_data *data, char *key)
 {
@@ -116,6 +129,7 @@ char	*get_textures(t_data *data, char *key)
 	if (!fd)
 		return (NULL);
 	str = get_next_line(fd);
+	printf("%s\n", key);
 	while (str)
 	{
 		if (ft_strncmp(str, key, ft_strlen(key)) == 0)

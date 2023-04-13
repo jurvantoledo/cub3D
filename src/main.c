@@ -6,7 +6,7 @@
 /*   By: jvan-tol <jvan-tol@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 13:49:59 by jvan-tol      #+#    #+#                 */
-/*   Updated: 2023/04/07 14:19:07 by jvan-tol      ########   odam.nl         */
+/*   Updated: 2023/04/13 17:05:48 by jvan-tol      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	initialize(t_data *data, int argc, char *argv[])
 	data->plane.x = 0;
 	data->plane.y = -0.66;
 	data->move_speed = 0.050;
+	if (data->move_speed > 0.1)
+		data->move_speed = 0.1;
 	data->rotation_speed = 0.10;
 }
 
