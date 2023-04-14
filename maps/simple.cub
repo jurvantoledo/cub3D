@@ -3,8 +3,6 @@ SO ./assets/textures/south.png
 WE ./assets/textures/west.png
 EA ./assets/textures/east.png
 
-
-
 F 222,100,0
 C 225,0,0
 
